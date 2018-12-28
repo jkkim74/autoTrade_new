@@ -6,7 +6,6 @@ class Kiwoom(QAxWidget):
         super().__init__()
         self._create_kiwoom_instance()
         self._set_signal_slot()
-        self.condition_code_list = []
 
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
