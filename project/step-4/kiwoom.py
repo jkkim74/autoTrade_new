@@ -65,6 +65,9 @@ class Kiwoom(QAxWidget):
         if rqname == "opt10001_req":
             self.pbr = self.get_comm_data(trcode, rqname, 0, "PBR")
             self.per = self.get_comm_data(trcode, rqname, 0, "PER")
+        elif rqname == "opt10086_req":
+            self.e_price = self.get_comm_data(trcode, rqname, 0, "종가")
+            self.s_price = self.get_comm_data(trcode, rqname, 0, "시가")
         try:
             self.tr_loop.exit()
         except:

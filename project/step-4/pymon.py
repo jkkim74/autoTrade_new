@@ -19,6 +19,8 @@ class PyMon:
         self.kiwoom.send_condition("0150", "스캘퍼_시가갭", "011", 1)
         #print(self.kiwoom.condition_code_list[:-1])
         code_list = self.kiwoom.condition_code_list[:-1]
+        r_price = self.get_condition_param(code_list[0], "20181227")
+        print(r_price)
 
     def run_pbr_per_screener(self):
         code_list = self.kiwoom.get_code_list_by_market(0) + self.kiwoom.get_code_list_by_market(10)
@@ -35,6 +37,11 @@ class PyMon:
         #
         # data = sorted(result, key=lambda x:x[2])
         # self.dump_data(data[:30])
+    def get_condition_param(self, code, s_date):
+        self.kiwoom.set_input_value("종목코드", code)
+        self.kiwoom.set_input_value("시작일자", s_date)
+        self.kiwoom.comm_rq_data("opt10086_req", "opt10086", 0, "0101")
+        return (self.kiwoom.s_price, self.kiwoom.e_price)
 
     def get_per_pbr(self, code):
         self.kiwoom.set_input_value("종목코드", code)
