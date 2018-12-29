@@ -1,0 +1,254 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"62470a7c-b0e5-44b2-b959-47864ba5714d\" name=\"Default\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/project/step-4/kiwoom.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/project/step-4/kiwoom.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileEditorManager\">\r\n    <leaf SIDE_TABS_SIZE_LIMIT_KEY=\"300\">\r\n      <file pinned=\"false\" current-in-tab=\"false\">\r\n        <entry file=\"file://$PROJECT_DIR$/project/step-4/kiwoom.py\">\r\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n            <state relative-caret-position=\"-2033\">\r\n              <caret line=\"7\" column=\"31\" selection-start-line=\"7\" selection-start-column=\"31\" selection-end-line=\"7\" selection-end-column=\"31\" />\r\n              <folding>\r\n                <element signature=\"e#0#32#0\" expanded=\"true\" />\r\n              </folding>\r\n            </state>\r\n          </provider>\r\n        </entry>\r\n      </file>\r\n      <file pinned=\"false\" current-in-tab=\"true\">\r\n        <entry file=\"file://$PROJECT_DIR$/project/step-4/pymon.py\">\r\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n            <state relative-caret-position=\"360\">\r\n              <caret line=\"20\" column=\"56\" selection-start-line=\"20\" selection-start-column=\"56\" selection-end-line=\"20\" selection-end-column=\"56\" />\r\n              <folding>\r\n                <element signature=\"e#0#10#0\" expanded=\"true\" />\r\n              </folding>\r\n            </state>\r\n          </provider>\r\n        </entry>\r\n      </file>\r\n    </leaf>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"FindInProjectRecents\">\r\n    <findStrings>\r\n      <find>get_condition_name_list</find>\r\n      <find>send_condition</find>\r\n      <find>_set_signal_slot</find>\r\n      <find>OnReceiveConditionVer</find>\r\n      <find>get_code_list_by_market</find>\r\n      <find>comm_rq_data</find>\r\n    </findStrings>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"IdeDocumentHistory\">\r\n    <option name=\"CHANGED_PATHS\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/class01/pywinauto01.py\" />\r\n        <option value=\"$PROJECT_DIR$/class01/pywinauto02.py\" />\r\n        <option value=\"$PROJECT_DIR$/class01/pywinauto03.py\" />\r\n        <option value=\"$PROJECT_DIR$/class01/flash3.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-1/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-1/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-2/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-2/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-3/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-4/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class03/step-5/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-1.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-1/pymon.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-3/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-3/pytrader.py\" />\r\n        <option value=\"$PROJECT_DIR$/class01/pyqt.py\" />\r\n        <option value=\"$PROJECT_DIR$/class02/telegram02.py\" />\r\n        <option value=\"$PROJECT_DIR$/class02/telegram03.py\" />\r\n        <option value=\"$PROJECT_DIR$/class02/telegram04.py\" />\r\n        <option value=\"$PROJECT_DIR$/class02/ex01.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/step-1/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition-1/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition-2/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition-2/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition-3/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-3/pymon.py\" />\r\n        <option value=\"$PROJECT_DIR$/class02/telegram01.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/step-1/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/class04/condition-3/run.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-4/kiwoom.py\" />\r\n        <option value=\"$PROJECT_DIR$/project/step-4/pymon.py\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\r\n    <option name=\"x\" value=\"173\" />\r\n    <option name=\"y\" value=\"61\" />\r\n    <option name=\"width\" value=\"960\" />\r\n    <option name=\"height\" value=\"886\" />\r\n  </component>\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectView\">\r\n    <navigator proportions=\"\" version=\"1\">\r\n      <foldersAlwaysOnTop value=\"true\" />\r\n    </navigator>\r\n    <panes>\r\n      <pane id=\"Scope\" />\r\n      <pane id=\"ProjectPane\">\r\n        <subPane>\r\n          <expand>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"class04\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"class04\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"condition-3\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"class04\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"step-1\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"project\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n            <path>\r\n              <item name=\"Lab07\" type=\"b2602c69:ProjectViewProjectNode\" />\r\n              <item name=\"Lab07\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"project\" type=\"462c0819:PsiDirectoryNode\" />\r\n              <item name=\"step-3\" type=\"462c0819:PsiDirectoryNode\" />\r\n            </path>\r\n          </expand>\r\n          <select />\r\n        </subPane>\r\n      </pane>\r\n    </panes>\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\util\\autoTrade\\week07\\Lab07\\project\\step-4\" />\r\n      <recent name=\"F:\\Dropbox\\강의(FastCampus)\\파이썬첫걸음\\6기\\week07\\Lab07\\class04\" />\r\n      <recent name=\"F:\\Dropbox\\강의(FastCampus)\\파이썬첫걸음\\6기\\week07\\Lab07\\class04\\condition\" />\r\n      <recent name=\"F:\\Dropbox\\강의(FastCampus)\\파이썬첫걸음\\6기\\week07\\Lab07\\class04\\step-1\" />\r\n      <recent name=\"F:\\Dropbox\\강의(FastCampus)\\파이썬첫걸음\\5기\\week07\\Lab07\\project\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunDashboard\">\r\n    <option name=\"ruleStates\">\r\n      <list>\r\n        <RuleState>\r\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\r\n        </RuleState>\r\n        <RuleState>\r\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\r\n        </RuleState>\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.pymon\">\r\n    <configuration name=\"pymon\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/project/step-4\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/project/step-4/pymon.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"run (1)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/class04/step-1\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/class04/step-1/run.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"run (2)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/class04/condition-1\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/class04/condition-1/run.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"run (3)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/class04/condition-2\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/class04/condition-2/run.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"run (4)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/class04/condition-3\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/class04/condition-3/run.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Nosetests\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"_new_regexPattern\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;.&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Unittests\">\r\n      <module name=\"Lab07\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;.&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.run (1)\" />\r\n      <item itemvalue=\"Python.run (2)\" />\r\n      <item itemvalue=\"Python.run (3)\" />\r\n      <item itemvalue=\"Python.run (4)\" />\r\n      <item itemvalue=\"Python.pymon\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.pymon\" />\r\n        <item itemvalue=\"Python.run (4)\" />\r\n        <item itemvalue=\"Python.run (3)\" />\r\n        <item itemvalue=\"Python.run (2)\" />\r\n        <item itemvalue=\"Python.run (1)\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"62470a7c-b0e5-44b2-b959-47864ba5714d\" name=\"Default\" comment=\"\" />\r\n      <created>1502538145084</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1502538145084</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"ToolWindowManager\">\r\n    <frame x=\"-8\" y=\"-8\" width=\"1936\" height=\"1056\" extended-state=\"6\" />\r\n    <editor active=\"true\" />\r\n    <layout>\r\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"0\" visible=\"true\" weight=\"0.11116965\" />\r\n      <window_info id=\"Structure\" order=\"1\" weight=\"0.25\" />\r\n      <window_info id=\"Favorites\" order=\"2\" side_tool=\"true\" />\r\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"0\" />\r\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"1\" />\r\n      <window_info active=\"true\" anchor=\"bottom\" id=\"Run\" order=\"2\" visible=\"true\" weight=\"0.44468546\" />\r\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"3\" weight=\"0.39915523\" />\r\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"4\" weight=\"0.25\" />\r\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"5\" weight=\"0.4\" />\r\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"6\" />\r\n      <window_info anchor=\"bottom\" id=\"Version Control\" order=\"7\" />\r\n      <window_info anchor=\"bottom\" id=\"Terminal\" order=\"8\" weight=\"0.329718\" />\r\n      <window_info anchor=\"bottom\" id=\"Event Log\" order=\"9\" side_tool=\"true\" />\r\n      <window_info anchor=\"bottom\" id=\"Python Console\" order=\"10\" />\r\n      <window_info anchor=\"right\" id=\"Commander\" order=\"0\" weight=\"0.4\" />\r\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"1\" weight=\"0.25\" />\r\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"2\" weight=\"0.25\" />\r\n      <window_info anchor=\"right\" id=\"Data View\" order=\"3\" />\r\n    </layout>\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/class04/step-1/kiwoom.py</url>\r\n          <line>63</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"editorHistoryManager\">\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-1.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-1/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"425\">\r\n          <caret line=\"92\" selection-start-line=\"92\" selection-end-line=\"92\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class01/pywinauto01.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class01/pywinauto02.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class01/pywinauto03.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class01/flash3.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class02/ex01.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"399\">\r\n          <caret line=\"25\" column=\"9\" selection-start-line=\"25\" selection-start-column=\"9\" selection-end-line=\"25\" selection-end-column=\"9\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-4/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"1159\">\r\n          <caret line=\"62\" column=\"4\" selection-start-line=\"62\" selection-start-column=\"4\" selection-end-line=\"62\" selection-end-column=\"4\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-2/pymon.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"665\">\r\n          <caret line=\"39\" column=\"27\" selection-start-line=\"39\" selection-start-column=\"27\" selection-end-line=\"39\" selection-end-column=\"27\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-1/pymon.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"76\">\r\n          <caret line=\"6\" column=\"29\" selection-start-line=\"6\" selection-start-column=\"29\" selection-end-line=\"6\" selection-end-column=\"29\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/step-1/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"1976\">\r\n          <caret line=\"104\" column=\"55\" selection-start-line=\"104\" selection-start-column=\"55\" selection-end-line=\"104\" selection-end-column=\"55\" />\r\n          <folding>\r\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-2/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-3/pytrader.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"323\">\r\n          <caret line=\"20\" selection-start-line=\"20\" selection-end-line=\"20\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-5/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state>\r\n          <caret line=\"13\" selection-start-line=\"13\" selection-end-line=\"13\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class01/pyqt.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"209\">\r\n          <caret line=\"13\" column=\"44\" selection-start-line=\"13\" selection-start-column=\"44\" selection-end-line=\"13\" selection-end-column=\"44\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class02/telegram02.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class02/telegram03.py\" />\r\n    <entry file=\"file://$PROJECT_DIR$/class02/telegram01.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"209\">\r\n          <caret line=\"13\" lean-forward=\"true\" selection-start-line=\"13\" selection-end-line=\"13\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-1/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"133\">\r\n          <caret line=\"9\" lean-forward=\"true\" selection-start-line=\"9\" selection-end-line=\"9\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-3/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-1/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"666\">\r\n          <caret line=\"65\" lean-forward=\"true\" selection-start-line=\"65\" selection-end-line=\"65\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-2/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"742\">\r\n          <caret line=\"72\" column=\"19\" selection-start-line=\"72\" selection-start-column=\"19\" selection-end-line=\"72\" selection-end-column=\"19\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-1/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"171\">\r\n          <caret line=\"11\" selection-start-line=\"11\" selection-end-line=\"11\" />\r\n          <folding>\r\n            <element signature=\"e#0#10#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-2/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"171\">\r\n          <caret line=\"11\" selection-start-line=\"11\" selection-end-line=\"11\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-2/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"171\">\r\n          <caret line=\"11\" column=\"13\" selection-start-line=\"11\" selection-start-column=\"13\" selection-end-line=\"11\" selection-end-column=\"13\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-3/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"1425\">\r\n          <caret line=\"76\" column=\"10\" selection-start-line=\"76\" selection-start-column=\"10\" selection-end-line=\"76\" selection-end-column=\"10\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class03/step-4/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"171\">\r\n          <caret line=\"11\" column=\"13\" selection-start-line=\"11\" selection-start-column=\"13\" selection-end-line=\"11\" selection-end-column=\"13\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-1/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"2413\">\r\n          <caret line=\"128\" column=\"12\" selection-start-line=\"128\" selection-start-column=\"12\" selection-end-line=\"128\" selection-end-column=\"12\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/step-1/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"304\">\r\n          <caret line=\"19\" column=\"61\" selection-start-line=\"19\" selection-start-column=\"61\" selection-end-line=\"19\" selection-end-column=\"61\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-2/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"2527\">\r\n          <caret line=\"134\" column=\"5\" selection-start-line=\"134\" selection-start-column=\"5\" selection-end-line=\"134\" selection-end-column=\"5\" />\r\n          <folding>\r\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-3/pymon.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"19\">\r\n          <caret line=\"11\" column=\"17\" selection-start-line=\"11\" selection-start-column=\"17\" selection-end-line=\"11\" selection-end-column=\"17\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-3/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"-1001\">\r\n          <caret line=\"21\" selection-start-line=\"21\" selection-end-line=\"21\" />\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-3/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"323\">\r\n          <caret line=\"17\" column=\"34\" selection-start-line=\"17\" selection-start-column=\"13\" selection-end-line=\"17\" selection-end-column=\"34\" />\r\n          <folding>\r\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/class04/condition-3/run.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"171\">\r\n          <caret line=\"9\" selection-start-line=\"9\" selection-end-line=\"11\" selection-end-column=\"50\" />\r\n          <folding>\r\n            <element signature=\"e#0#10#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-4/database.db\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-4/kiwoom.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"-2033\">\r\n          <caret line=\"7\" column=\"31\" selection-start-line=\"7\" selection-start-column=\"31\" selection-end-line=\"7\" selection-end-column=\"31\" />\r\n          <folding>\r\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n    <entry file=\"file://$PROJECT_DIR$/project/step-4/pymon.py\">\r\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\r\n        <state relative-caret-position=\"360\">\r\n          <caret line=\"20\" column=\"56\" selection-start-line=\"20\" selection-start-column=\"56\" selection-end-line=\"20\" selection-end-column=\"56\" />\r\n          <folding>\r\n            <element signature=\"e#0#10#0\" expanded=\"true\" />\r\n          </folding>\r\n        </state>\r\n      </provider>\r\n    </entry>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(date 1545985315000)
++++ .idea/workspace.xml	(date 1546092624747)
+@@ -2,35 +2,71 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="62470a7c-b0e5-44b2-b959-47864ba5714d" name="Default" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/Lab07.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lab07.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/project/step-4/kiwoom.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/kiwoom.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/project/step-4/pymon.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/pymon.py" afterDir="false" />
+     </list>
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FUSProjectUsageTrigger">
++    <session id="761425468">
++      <usages-collector id="statistics.lifecycle.project">
++        <counts>
++          <entry key="project.closed" value="1" />
++          <entry key="project.open.time.0" value="1" />
++          <entry key="project.open.time.9" value="1" />
++          <entry key="project.opened" value="2" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.extensions.open">
++        <counts>
++          <entry key="py" value="2" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.types.open">
++        <counts>
++          <entry key="Python" value="2" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.extensions.edit">
++        <counts>
++          <entry key="py" value="389" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.types.edit">
++        <counts>
++          <entry key="Python" value="389" />
++        </counts>
++      </usages-collector>
++    </session>
+   </component>
+   <component name="FileEditorManager">
+     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+-      <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/project/step-4/kiwoom.py">
++      <file pinned="false" current-in-tab="true">
++        <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="-2033">
+-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
++            <state relative-caret-position="196">
++              <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+               <folding>
+-                <element signature="e#0#32#0" expanded="true" />
++                <element signature="e#0#10#0" expanded="true" />
+               </folding>
+             </state>
+           </provider>
+         </entry>
+       </file>
+-      <file pinned="false" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/project/step-4/kiwoom.py">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="360">
+-              <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
++            <state relative-caret-position="247">
++              <caret line="67" column="36" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+               <folding>
+-                <element signature="e#0#10#0" expanded="true" />
++                <element signature="e#0#32#0" expanded="true" />
+               </folding>
+             </state>
+           </provider>
+@@ -109,46 +145,23 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
+           <expand>
+             <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
+-            </path>
+-            <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
+-              <item name="class04" type="462c0819:PsiDirectoryNode" />
+-            </path>
+-            <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
+-              <item name="class04" type="462c0819:PsiDirectoryNode" />
+-              <item name="condition-3" type="462c0819:PsiDirectoryNode" />
+-            </path>
+-            <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
+-              <item name="class04" type="462c0819:PsiDirectoryNode" />
+-              <item name="step-1" type="462c0819:PsiDirectoryNode" />
++              <item name="autoTrade" type="b2602c69:ProjectViewProjectNode" />
++              <item name="autoTrade" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
++              <item name="autoTrade" type="b2602c69:ProjectViewProjectNode" />
++              <item name="autoTrade" type="462c0819:PsiDirectoryNode" />
+               <item name="project" type="462c0819:PsiDirectoryNode" />
+             </path>
+-            <path>
+-              <item name="Lab07" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Lab07" type="462c0819:PsiDirectoryNode" />
+-              <item name="project" type="462c0819:PsiDirectoryNode" />
+-              <item name="step-3" type="462c0819:PsiDirectoryNode" />
+-            </path>
+           </expand>
+           <select />
+         </subPane>
+       </pane>
++      <pane id="Scope" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+@@ -342,15 +355,15 @@
+     <servers />
+   </component>
+   <component name="ToolWindowManager">
+-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
++    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+     <editor active="true" />
+     <layout>
+-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11116965" />
++      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11089987" />
+       <window_info id="Structure" order="1" weight="0.25" />
+       <window_info id="Favorites" order="2" side_tool="true" />
+       <window_info anchor="bottom" id="Message" order="0" />
+       <window_info anchor="bottom" id="Find" order="1" />
+-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.44468546" />
++      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30904183" />
+       <window_info anchor="bottom" id="Debug" order="3" weight="0.39915523" />
+       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+@@ -365,6 +378,9 @@
+       <window_info anchor="right" id="Data View" order="3" />
+     </layout>
+   </component>
++  <component name="VcsContentAnnotationSettings">
++    <option name="myLimit" value="2678400000" />
++  </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+       <breakpoints>
+@@ -393,13 +409,6 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="399">
+           <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+-        </state>
+-      </provider>
+-    </entry>
+-    <entry file="file://$PROJECT_DIR$/class03/step-4/kiwoom.py">
+-      <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="1159">
+-          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+         </state>
+       </provider>
+     </entry>
+@@ -488,9 +497,6 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="171">
+           <caret line="11" selection-start-line="11" selection-end-line="11" />
+-          <folding>
+-            <element signature="e#0#10#0" expanded="true" />
+-          </folding>
+         </state>
+       </provider>
+     </entry>
+@@ -540,9 +546,6 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="2527">
+           <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+-          <folding>
+-            <element signature="e#0#32#0" expanded="true" />
+-          </folding>
+         </state>
+       </provider>
+     </entry>
+@@ -564,9 +567,6 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="323">
+           <caret line="17" column="34" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="34" />
+-          <folding>
+-            <element signature="e#0#32#0" expanded="true" />
+-          </folding>
+         </state>
+       </provider>
+     </entry>
+@@ -574,19 +574,23 @@
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="171">
+           <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="50" />
+-          <folding>
+-            <element signature="e#0#10#0" expanded="true" />
+-          </folding>
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/project/step-4/database.db">
+       <provider selected="true" editor-type-id="text-editor" />
++    </entry>
++    <entry file="file://$PROJECT_DIR$/class03/step-4/kiwoom.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-51">
++          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
++        </state>
++      </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/project/step-4/kiwoom.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-2033">
+-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
++        <state relative-caret-position="247">
++          <caret line="67" column="36" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+           <folding>
+             <element signature="e#0#32#0" expanded="true" />
+           </folding>
+@@ -595,7 +599,7 @@
+     </entry>
+     <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="360">
++        <state relative-caret-position="196">
+           <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+           <folding>
+             <element signature="e#0#10#0" expanded="true" />
