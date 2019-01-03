@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from kiwoom import *
 import time
 import pickle
+from datetime import datetime
+import pandas as pd
 
 class PyMon:
     def __init__(self):
@@ -19,8 +21,29 @@ class PyMon:
         self.kiwoom.send_condition("0150", "스캘퍼_시가갭", "011", 1)
         #print(self.kiwoom.condition_code_list[:-1])
         code_list = self.kiwoom.condition_code_list[:-1]
-        r_price = self.get_condition_param(code_list[0], "20181227")
+        # 금일날짜
+        today = datetime.today().strftime("%Y%m%d")
+        r_price = self.get_condition_param(code_list[1], today)
         print(r_price)
+        # 영업일 하루전날짜
+        df_hdays = pd.read_excel("data.xls")
+        hdays = df_hdays['일자 및 요일'].str.extract('(\d{4}-\d{2}-\d{2})', expand=False)
+        hdays = pd.to_datetime(hdays)
+        hdays.name = '날짜'
+        mdays = pd.date_range('2019-01-01', '2019-12-31', freq='B')
+        #print(mdays)
+        mdays = mdays.drop(hdays)
+        f_mdays = mdays.to_frame(index=True)
+        print(f_mdays)
+        # 개장일을 index로 갖는 DataFrame
+        #data = {'values': range(1, 31)}
+        #df_sample = pd.DataFrame(data, index=pd.date_range('2019-01-01', '2019-01-31'))
+        #df_mdays = pd.DataFrame(index=mdays)
+        #df_mdays.head(10)
+        # 두 DataFrame (df_sample, df_mdays)의 인덱스를 기준으로 합친다(merge)
+        #df = pd.merge(df_sample, df_mdays, right_index=True, left_index=True)
+        #df.head(10)
+
 
     def run_pbr_per_screener(self):
         code_list = self.kiwoom.get_code_list_by_market(0) + self.kiwoom.get_code_list_by_market(10)
