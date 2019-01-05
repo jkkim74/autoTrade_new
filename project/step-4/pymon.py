@@ -33,13 +33,13 @@ class PyMon:
         mdays = pd.date_range('2019-01-01', '2019-12-31', freq='B')
         #print(mdays)
         mdays = mdays.drop(hdays)
-        f_mdays = mdays.to_frame(index=True)
-        print(f_mdays)
+        #f_mdays = mdays.to_frame(index=True)
+        #print(f_mdays)
         # 개장일을 index로 갖는 DataFrame
         #data = {'values': range(1, 31)}
         #df_sample = pd.DataFrame(data, index=pd.date_range('2019-01-01', '2019-01-31'))
-        #df_mdays = pd.DataFrame(index=mdays)
-        #df_mdays.head(10)
+        df_mdays = pd.DataFrame(index=mdays)
+        print(type(df_mdays))
         # 두 DataFrame (df_sample, df_mdays)의 인덱스를 기준으로 합친다(merge)
         #df = pd.merge(df_sample, df_mdays, right_index=True, left_index=True)
         #df.head(10)
