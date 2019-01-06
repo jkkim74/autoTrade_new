@@ -1,0 +1,232 @@
+<html lang="ko">
+<head>
+    <script src="https://s1.daumcdn.net/svc/attach/U03/cssjs/socialshare/socialshare_standalone-1.9.4.merged.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="http://finance.daum.net/favicon.ico" type="image/x-icon" />
+
+<title>종목 상세 | 다음 금융 </title>
+
+<link rel="stylesheet" type="text/css" href="/dist/common.css?v=1546416212" />
+<link rel="stylesheet" type="text/css" href="/dist/custom.ui.css?v=1546416212" />
+
+<script>
+    window.REQUEST_URI = '/quotes/A041140';
+    window.CURRENT_URL = encodeURIComponent(
+        "".concat(
+            window.location.protocol,
+            "//",
+            window.location.host,
+            window.location.pathname,
+            window.location.search
+        )
+    );
+    window.FINANCE = {};
+    window.FINANCE.BASE_URL = '/dist';
+    window.FINANCE.VERSION = '1546416212';
+    window.FINANCE.API_URL = '';
+    window.FINANCE.HOST = 'http://finance.daum.net';
+    window._REALTIME_HOST = 'http://realtime-front-df.dunamu.com';
+    window._WISE_FN_HOST = 'http://wisefn.stock.daum.net/v1';
+    window._PERIOD = '';
+</script>
+
+
+<script type="text/javascript" src="/dist/requirejs/require.js?v=1546416212"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128578811-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128578811-1');
+</script>
+
+<!--[if lt IE 9]> <script type="text/javascript" src="/dist/html5.js?v=1546416212"></script> <![endif]-->
+
+</head>
+<body class="finance">
+    <div id="wrap">
+        <div class="header">
+    <div class="head_media f_clear">
+        <h1><a href="http://finance.daum.net" id="kakaoServiceLogo" class="#gnb #default #service_finance"><span class="ir_wa">금융</span></a></h1>
+        <strong class="screen_out">관련서비스</strong>
+        <ul class="kakaoRelServices">
+            <li><a href="http://realestate.daum.net"><span class="ir_wa">부동산</span></a></li>
+        </ul>
+        <h2 class="screen_out">검색</h2>
+        <div class="search_news" id="boxSearch"></div>
+
+        
+<script>
+    requirejs(["/dist/daum/app/config.js?v=1546416212"], function (common) {
+        require(["app/common/search"]);
+    });
+</script>
+    
+
+    </div>
+    <div id="kakaoGnb" role="navigation">
+        <div class="inner_gnb">
+            <h2 class="screen_out">금융 메인메뉴</h2>
+            <ul class="gnb_comm">
+                <li class="">
+                    <a href="/" class="link_gnb link_gnb1">
+                        <span class="screen_out">선택됨</span>
+                        <span class="ir_wa">홈</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="on">
+                    <a href="/domestic" class="link_gnb link_gnb2">
+                        <span class="ir_wa">국내</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/global" class="link_gnb link_gnb3">
+                        <span class="ir_wa">해외</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/news" class="link_gnb link_gnb4">
+                        <span class="ir_wa">뉴스</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/investment" class="link_gnb link_gnb5">
+                        <span class="ir_wa">투자정보</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/talks" class="link_gnb link_gnb6">
+                        <span class="ir_wa">종목토론</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/my" class="link_gnb link_gnb8">
+                        <span class="ir_wa">MY</span>
+                        <span class="bar_gnb"><span class="inner_bar"></span></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="gnb_etc">
+                <ul class="gnb_with">
+                    <li class="">
+                        <a href="/exchanges" class="link_gnb link_gnb1">
+                            <span class="ir_wa">환율</span>
+                            <span class="bar_gnb"><span class="inner_bar"></span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://insurance.dunamu.com" class="link_gnb link_gnb3">
+                            <span class="ir_wa">보험</span>
+                            <span class="bar_gnb"><span class="inner_bar"></span></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="gnb_banner" id="boxKakaoStockBanner">
+                    <a href="javascript:void(0)" class="btnKakaoStockBanner"><span class="ir_wa">쓰던 증권사 그대로, 카카오스탁</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    requirejs(["/dist/daum/app/config.js?v=1546416212"], function (common) {
+        require(["app/common/kakaostock"]);
+    });
+</script>
+    
+
+
+        <div class="container">
+            <link rel="stylesheet" type="text/css" href="/dist/layerpopup.css?v=1546416212" />
+<div id="shareLayer"></div>
+<div id="boxApp">
+	<div class="detailStk" id="boxDashboard"></div>
+	<div style="clear:both"></div>
+	<div class="clearLine customLine">
+		<div class="leftW">
+			<div class="tabB">
+				<table class="tab">
+					<colgroup>
+						<col width="*">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+					</colgroup>
+					<tbody>
+						<tr id="boxTabs"></tr>
+					</tbody>
+				</table>
+				<div id="boxContentHeader"></div>
+			</div>
+			<div id="boxContents"></div>
+		</div>
+		<div class="rightW" id="boxRightSidebar"></div>
+	</div>
+</div>
+<div id="boxPopup"></div>
+<script>
+    window._IS_SPA = true;
+    window._WISE_FN_HOST = 'http://wisefn.stock.daum.net/v1';
+    window._SYMBOL_CODE = 'A041140';
+    window._WRITE_URL = '';
+    window._DAUM_NAME = '';
+</script>
+
+<script>
+    requirejs(["/dist/daum/app/config.js?v=1546416212"], function (common) {
+        require(["app/quotes/index"]);
+    });
+</script>
+    
+
+        </div>
+
+        <div class="footer">
+    <span>
+        <div class="fl">
+            <ul>
+                <li><a target='_blank' href="http://policy.daum.net/info/info" title="서비스 약관/정책">서비스 약관/정책</a></li>
+                <li><a target='_blank' href="http://cs.daum.net/faq/19.html" title="금융 고객센터">금융 고객센터</a></li>
+                <li><a target='_blank' href="https://cs.daum.net/question/19.html" title="금융 문의하기">금융 문의하기</a></li>
+                <li><a target='_blank' href="http://blog.daum.net/daumfinance/" title="공지사항">공지사항</a></li>
+            </ul>
+            <p>카카오가 제공하는 증권정보는 단순히 정보의 제공을 목적으로 하고 있으며, 사이트에서 제공되는 정보는 오류 및 지연이<br>발생될 수 있습니다. 제공된 정보이용에 따르는 책임은 이용자 본인에게 있으며, 카카오는 이용자의 투자결과에 따른<br>법적 책임을 지지 않습니다.</p>
+        </div>
+        <div class="fr">
+            <p>위 내용에 대한 저작권 및 법적 책임은 자료제공사 또는<br>글쓴이에 있으며 카카오의 입장과 다를 수 있습니다.</p>
+            <p>Copyright (C) Kakao Corp. All rights reserved.</p>
+        </div>
+    </span>
+</div>
+
+
+        <div id="kakaoWrap">
+    <div id="wrapMinidaum"></div>
+</div>
+
+<script>
+    requirejs(["/dist/daum/app/config.js?v=1546416212"], function (common) {
+        require(["app/common/mini_daum"]);
+    });
+</script>
+    
+    </div>
+</body>
+</html>

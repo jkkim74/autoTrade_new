@@ -1,29 +1,32 @@
+import pandas as pd
+import requests
 from bs4 import BeautifulSoup
-import urllib.request
 
-# 출력 파일 명
-OUTPUT_FILE_NAME = 'output.txt'
-# 긁어 올 URL
-URL = 'https://finance.naver.com/item/news.nhn?code=041140'
+req = requests.get('https://finance.naver.com/item/news_news.nhn?code=041140&page=&sm=title_entity_id.basic&clusterId=')#naver
+#req=requests.get('https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20180124')
+#req = requests.get('http://finance.daum.net/quotes/A041140#news/stock')#daum
+html = req.text
+#print(html)
+soup = BeautifulSoup(html, 'html.parser')
+columns=soup.select('div.tb_cont > table > thead > tr > th')
+print(columns)
 
+contents = soup.select('div.tb_cont > table > tbody > tr')
+dfcontent = []
+alldfcontents = []
 
-# 크롤링 함수
-def get_text(URL):
-    source_code_from_URL = urllib.request.urlopen(URL)
-    soup = BeautifulSoup(source_code_from_URL, 'lxml', from_encoding='utf-8')
-    text = ''
-    for item in soup.find_all('div', id='articleBodyContents'):
-        text = text + str(item.find_all(text=True))
-    return text
+for content in contents:
+    tds = content.find_all("td")
+    for td in tds:
+        dfcontent.append(td.text)
+    alldfcontents.append(dfcontent)
+    dfcontent=[]
 
+print(alldfcontents)
 
-# 메인 함수
-def main():
-    open_output_file = open(OUTPUT_FILE_NAME, 'w')
-    result_text = get_text(URL)
-    open_output_file.write(result_text)
-    open_output_file.close()
-
-
-if __name__ == '__main__':
-    main()
+req_detail = requests.get('https://finance.naver.com/item/news_read.nhn?article_id=0003479311&office_id=011&code=041140&page=&sm=title_entity_id.basic')
+html_view = req_detail.text
+#print(html_view)
+soup_view = BeautifulSoup(html_view, 'html.parser')
+contents_view = soup_view.find("div", {"id": "news_read"})
+print(contents_view)
