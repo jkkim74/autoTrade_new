@@ -26,7 +26,7 @@ print(alldfcontents)
 
 req_detail = requests.get('https://finance.naver.com/item/news_read.nhn?article_id=0003479311&office_id=011&code=041140&page=&sm=title_entity_id.basic')
 html_view = req_detail.text
-#print(html_view)
+print(html_view)
 soup_view = BeautifulSoup(html_view, 'html.parser')
 contents_view = soup_view.find("div", {"id": "news_read"})
 print(contents_view)

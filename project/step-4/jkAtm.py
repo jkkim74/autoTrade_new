@@ -7,6 +7,7 @@ from kiwoom import *
 s_year_date = '2019-01-01';
 s_standard_date = '2019-01-03'
 e_standard_date = '2019-01-04'
+d_date = '2019-01-07'
 
 class JkAtm:
     def __init__(self):
@@ -28,11 +29,11 @@ class JkAtm:
         # 2) 재료 소멸성 뉴스가 나왔을 경우 반드시 2번째 갭을 띄운 날짜에 기관의 순매수가 있어야 진입 가능
 
         # 금일날짜
-        today = datetime.today().strftime("%Y%m%d")
+        today = datetime.today().strftime("%Y-%m-%d")
         #df_krx = fdr.StockListing('KRX')
         #print(df_krx.head())
         #대상종목의 매수가 산정을 위한 가격데이타 수집
-        df = fdr.DataReader(code_list[1],s_year_date)
+        df = fdr.DataReader(code_list[1], s_year_date)
         print(df['Close'][s_standard_date]) # 5%이상상승당일 종가
         print(df['Open'][e_standard_date])  # 매수전날 시가
         print(df['Close'][e_standard_date]) # 매수전날 종가
@@ -52,9 +53,11 @@ class JkAtm:
         else:
             self.s_buy_price = s_buy_close_price_t
             self.e_buy_price = self.e_buy_price
+        self.d_open_price = df['Open'][d_date]
 
         print(self.s_buy_price)
         print(self.e_buy_price)
+        print(self.d_open_price)
         # 1) 매매대상 코드, 매매주가 범위(start_price,end_price)
         # 2) 뉴스키워드 검색
         # result = []

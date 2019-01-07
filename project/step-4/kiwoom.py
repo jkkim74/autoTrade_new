@@ -65,6 +65,7 @@ class Kiwoom(QAxWidget):
         if rqname == "opt10001_req":
             self.pbr = self.get_comm_data(trcode, rqname, 0, "PBR")
             self.per = self.get_comm_data(trcode, rqname, 0, "PER")
+            self.high = self.get_comm_data(trcode, rqname, 0, "상한가")
         elif rqname == "opt10086_req":
             self.e_price = self.get_comm_data(trcode, rqname, 0, "종가")
             self.s_price = self.get_comm_data(trcode, rqname, 0, "시가")
@@ -74,7 +75,7 @@ class Kiwoom(QAxWidget):
             pass
 
     def send_order(self, rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no):
-        self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
+        return self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
         # self.order_loop = QEventLoop()
         # self.order_loop.exec_()
