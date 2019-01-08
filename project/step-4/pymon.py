@@ -38,8 +38,14 @@ class PyMon:
         # 개장일을 index로 갖는 DataFrame
         #data = {'values': range(1, 31)}
         #df_sample = pd.DataFrame(data, index=pd.date_range('2019-01-01', '2019-01-31'))
-        df_mdays = pd.DataFrame(index=mdays)
-        print(type(df_mdays))
+        df_mdays = pd.DataFrame({'date':mdays})
+        df_mdays_list = df_mdays['date'].tolist()
+        for i, df_day in enumerate(df_mdays_list):
+            if(df_day.__format__('%Y%m%d') == today):
+                self.prev_bus_day_1 = df_mdays_list[i - 1].__format__('%Y-%m-%d')
+                self.prev_bus_day_2 = df_mdays_list[i - 2].__format__('%Y-%m-%d')
+
+        print(self.prev_bus_day_1,self.prev_bus_day_2)
         # 두 DataFrame (df_sample, df_mdays)의 인덱스를 기준으로 합친다(merge)
         #df = pd.merge(df_sample, df_mdays, right_index=True, left_index=True)
         #df.head(10)

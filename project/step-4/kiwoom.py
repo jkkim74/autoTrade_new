@@ -66,6 +66,7 @@ class Kiwoom(QAxWidget):
             self.pbr = self.get_comm_data(trcode, rqname, 0, "PBR")
             self.per = self.get_comm_data(trcode, rqname, 0, "PER")
             self.high = self.get_comm_data(trcode, rqname, 0, "상한가")
+            self.cur_price = self.get_comm_data(trcode, rqname, 0, "현재가")
         elif rqname == "opt10086_req":
             self.e_price = self.get_comm_data(trcode, rqname, 0, "종가")
             self.s_price = self.get_comm_data(trcode, rqname, 0, "시가")
