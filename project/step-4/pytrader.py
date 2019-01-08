@@ -70,11 +70,19 @@ class PyTrader:
         print(self.e_buy_price)
         print(self.d_open_price)
 
+        # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
+        if(self.s_buy_price > self.d_open_price):
+            raise Exception("Can't Buy Stock")
+
         if(self.e_buy_price >= self.d_open_price  >=  self.s_buy_price):
             high_price = int(self.get_high(buy_stock_code)[1:])
             nQty = int(total_buy_money / high_price)
             print(high_price, nQty)
             result = self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, high_price, "03", "")
+            if(result == 0):
+                print("매수주문을 하였습니다.")
+            else:
+                print("매수주문을 실패하였습니다.")
             print(result)
 
         #매수
