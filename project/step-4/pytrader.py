@@ -10,10 +10,11 @@ import pickle
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-buy_stock_code = '057030'
-total_buy_money = 30000000
-maesu_start_time = 184900#90000
-maesu_end_time  = 185100#93000
+buy_stock_code = '142210'
+total_buy_money = 20000000
+maesu_start_time = 90000
+maesu_end_time  = 10000
+maemae_logic = 'S' # 'S':시가갭매매 'R':램덤매매
 class PyTrader:
     def __init__(self):
         self.kiwoom = Kiwoom()
@@ -63,6 +64,24 @@ class PyTrader:
                 self.prev_bus_day_2 = df_mdays_list[i - 2].__format__('%Y-%m-%d')
 
     def run(self):
+        if(maemae_logic == 'S'):
+            self.S_mae_mae()
+        elif(maemae_logic == 'R'):
+            self.R_mae_mae()
+        #매수
+        #for code in codes:
+        #    self.kiwoom.send_order("send_order", "0101", account, 1, code, 10, 0, "03", "")
+        #    print(code)
+    def R_mae_mae(self):
+        account = self.get_account()
+        nQty = 2
+        stock_price = '1235'
+        buy_stock_code = '033170'
+        self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
+        # if (result == 0):
+        #     print("매수주문을 하였습니다.")
+
+    def S_mae_mae(self):
         account = self.get_account()
         # 금일날짜
         today   = datetime.today().strftime("%Y-%m-%d")
@@ -104,14 +123,17 @@ class PyTrader:
         # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
         if(self.s_buy_price > self.d_open_price):
             raise Exception("Can't Buy Stock")
-        result = -1
+        result = 0
         while True:
             now_time = int(datetime.now().strftime('%H%M%S'))
-            self.d_cur_price = int(self.get_cur_price(buy_stock_code)[1:])
+            cur_price = self.get_cur_price(buy_stock_code)
+            if(cur_price[0] == '-' or cur_price[0] == '+'):
+                cur_price = cur_price[1:]
+            self.d_cur_price = int(cur_price)
             print('현재시간 : ', now_time,'현재가 : ', self.d_cur_price )
             if(maesu_end_time >= now_time >= maesu_start_time):
                 if((self.e_buy_price >= self.d_cur_price  >=  self.s_buy_price) and result == -1):
-                    high_price = int(self.get_high(buy_stock_code)[1:])
+                    high_price = int(self.get_high(buy_stock_code))
                     nQty = int(total_buy_money / high_price)
                     print(high_price, nQty)
                     result = self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, high_price, "03", "")
@@ -122,15 +144,9 @@ class PyTrader:
                     else:
                         print("매수주문을 실패하였습니다.")
                         break
-            else:
-                break
-            time.sleep(0.2)
-
-
-        #매수
-        #for code in codes:
-        #    self.kiwoom.send_order("send_order", "0101", account, 1, code, 10, 0, "03", "")
-        #    print(code)
+            #else:
+            #   break
+            time.sleep(2)
 
     def load_data(self):
         try:
