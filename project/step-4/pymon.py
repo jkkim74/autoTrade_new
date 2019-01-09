@@ -5,15 +5,35 @@ import time
 import pickle
 from datetime import datetime
 import pandas as pd
-
+SEL_CONDITION_NAME = '스캘퍼_시가갭'
 class PyMon:
     def __init__(self):
         self.kiwoom = Kiwoom()
         self.kiwoom.comm_connect()
 
     def run(self):
-        #self.run_pbr_per_screener()
-        self.run_condition_data()
+        # self.run_pbr_per_screener()
+        # self.run_condition_data()
+        self.get_codition_stock_list()
+
+    def get_codition_stock_list(self):
+        self.kiwoom.get_condition_load()
+        # self.kiwoom.get_condition_name_list()
+        self.kiwoom.send_condition("0150", SEL_CONDITION_NAME, "011", 1)
+        # print(self.kiwoom.condition_code_list[:-1])
+        code_list = self.kiwoom.condition_code_list[:-1]
+        result = []
+        for i, code in enumerate(code_list):
+            print("%d : %d" % (i, len(code_list)))
+            if i > 100:
+                break
+
+            (per, pbr) = self.get_per_pbr(code)
+            if 2.5 <= per <= 10:
+                result.append((code, per, pbr))
+
+        data = sorted(result, key=lambda x:x[2])
+        self.dump_data(data[:30])
 
     def run_condition_data(self):
         self.kiwoom.get_condition_load()
@@ -76,6 +96,11 @@ class PyMon:
         self.kiwoom.set_input_value("종목코드", code)
         self.kiwoom.comm_rq_data("opt10001_req", "opt10001", 0, "0101")
         time.sleep(0.2)
+        if(self.kiwoom.per == ''):
+            self.kiwoom.per = 0
+        if(self.kiwoom.pbr == ''):
+            self.kiwoom.pbr = 0
+        print(self.kiwoom.per, self.kiwoom.pbr)
         return (float(self.kiwoom.per), float(self.kiwoom.pbr))
 
     def dump_data(self, data):

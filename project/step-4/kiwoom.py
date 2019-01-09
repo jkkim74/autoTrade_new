@@ -90,7 +90,10 @@ class Kiwoom(QAxWidget):
         result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
         if (result == 0):
-            print("매수주문을 하였습니다.")
+            if(order_type == 1):
+                print("매수주문을 하였습니다.")
+            elif(order_type == 2):
+                print("매도주문을 하였습니다.")
         self.order_loop = QEventLoop()
         self.order_loop.exec_()
 
@@ -107,6 +110,7 @@ class Kiwoom(QAxWidget):
         # print(util.whoami() + 'gubun: {}, itemCnt: {}, fidList: {}'
         #         .format(gubun, itemCnt, fidList))
         if (gubun == "1"):  # 잔고 정보
+            print('##################### : ', gubun)
             # 잔고 정보에서는 매도/매수 구분이 되지 않음
 
             jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
@@ -115,7 +119,12 @@ class Kiwoom(QAxWidget):
             maeip_danga = int(self.get_chejan_data(jk_util.name_fid['매입단가']))
             jongmok_name = self.get_chejan_data(jk_util.name_fid['종목명']).strip()
             current_price = abs(int(self.get_chejan_data(jk_util.name_fid['현재가'])))
-
+            print('종목코드 : ', jongmok_code)
+            print('보유수량 : ', boyou_suryang)
+            print('주문가능수량 : ', jumun_ganeung_suryang)
+            print('매입단가 : ', maeip_danga)
+            print('종목명 : ', jongmok_name)
+            print('현재가 : ', current_price)
             # 미체결 수량이 있는 경우 잔고 정보 저장하지 않도록 함
             if (jongmok_code in self.michegyeolInfo):
                 if (self.michegyeolInfo[jongmok_code]['미체결수량']):
@@ -180,9 +189,13 @@ class Kiwoom(QAxWidget):
             pass
 
         elif (gubun == "0"):
+            print('##################### : ', gubun)
             jumun_sangtae = self.get_chejan_data(jk_util.name_fid['주문상태'])
             jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
             michegyeol_suryang = int(self.get_chejan_data(jk_util.name_fid['미체결수량']))
+            print('주문상태 : ', jumun_sangtae)
+            print('종목코드 : ', jongmok_code)
+            print('미체결수량 : ', michegyeol_suryang)
             # 주문 상태
             # 매수 시 접수(gubun-0) - 체결(gubun-0) - 잔고(gubun-1)
             # 매도 시 접수(gubun-0) - 잔고(gubun-1) - 체결(gubun-0) - 잔고(gubun-1)   순임
@@ -205,10 +218,11 @@ class Kiwoom(QAxWidget):
         # print(self.get_chejan_data(302))
         # print(self.get_chejan_data(900))
         # print(self.get_chejan_data(901))
-        # try:
-        #     self.order_loop.exit()
-        # except:
-        #     pass
+        if(self.michegyeolInfo[jongmok_code]['미체결수량'] == 0):
+            try:
+                 self.order_loop.exit()
+            except:
+                 pass
 
     def _get_repeat_cnt(self, trcode, rqname):
         ret = self.dynamicCall("GetRepeatCnt(QString, QString)", trcode, rqname)
