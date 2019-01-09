@@ -10,7 +10,7 @@ import pickle
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-buy_stock_code = '142210'
+buy_stock_code_list = ['033180','046940']
 total_buy_money = 20000000
 maesu_start_time = 90000
 maesu_end_time  = 10000
@@ -94,59 +94,63 @@ class PyTrader:
         s_standard_date = self.prev_bus_day_2
         e_standard_date = self.prev_bus_day_1
         print('5%이상상승당일 : ', s_standard_date, '시가갭날짜 : ', e_standard_date)
-        # 대상종목의 매수가 산정을 위한 가격데이타 수집
-        df = fdr.DataReader(buy_stock_code, s_year_date)
-        print('5%이상상승당일 종가 : ', df['Close'][s_standard_date])  # 5%이상상승당일 종가
-        print('시가갭날 시가 : ', df['Open'][e_standard_date])  # 매수전날 시가
-        print('시가갭날 종가 : ', df['Close'][e_standard_date])  # 매수전날 종가
 
-        # 매수가능 구간 가격 조회
-        s_buy_close_price_t = df['Close'][s_standard_date]
-        e_buy_open_price_t = df['Open'][e_standard_date]
-        e_buy_close_price_t = df['Close'][e_standard_date]
-        if (e_buy_open_price_t > e_buy_close_price_t):
-            self.e_buy_price = int(e_buy_close_price_t)
-        else:
-            self.e_buy_price = int(e_buy_open_price_t)
+        for buy_stock_code in buy_stock_code_list:
+            # 대상종목의 매수가 산정을 위한 가격데이타 수집
+            df = fdr.DataReader(buy_stock_code, s_year_date)
+            print('5%이상상승당일 종가 : ', df['Close'][s_standard_date])  # 5%이상상승당일 종가
+            print('시가갭날 시가 : ', df['Open'][e_standard_date])  # 매수전날 시가
+            print('시가갭날 종가 : ', df['Close'][e_standard_date])  # 매수전날 종가
 
-        if (s_buy_close_price_t > self.e_buy_price):
-            self.s_buy_price = int(self.e_buy_price)
-            self.e_buy_price = int(s_buy_close_price_t)
-        else:
-            self.s_buy_price = int(s_buy_close_price_t)
-            self.e_buy_price = int(self.e_buy_price)
+            # 매수가능 구간 가격 조회
+            s_buy_close_price_t = df['Close'][s_standard_date]
+            e_buy_open_price_t = df['Open'][e_standard_date]
+            e_buy_close_price_t = df['Close'][e_standard_date]
+            if (e_buy_open_price_t > e_buy_close_price_t):
+                self.e_buy_price = int(e_buy_close_price_t)
+            else:
+                self.e_buy_price = int(e_buy_open_price_t)
 
-        # 금일 시가 조회
-        self.d_open_price = int(self.get_start_price(buy_stock_code, today_f)[1:])
-        # self.e_buy_price = 4050
-        print("시작가:", self.s_buy_price, ", 종료가:", self.e_buy_price, ", 당일시작가:", self.d_open_price)
-        # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
-        if(self.s_buy_price > self.d_open_price):
-            raise Exception("Can't Buy Stock")
-        result = 0
-        while True:
-            now_time = int(datetime.now().strftime('%H%M%S'))
-            cur_price = self.get_cur_price(buy_stock_code)
-            if(cur_price[0] == '-' or cur_price[0] == '+'):
-                cur_price = cur_price[1:]
-            self.d_cur_price = int(cur_price)
-            print('현재시간 : ', now_time,'현재가 : ', self.d_cur_price )
-            if(maesu_end_time >= now_time >= maesu_start_time):
-                if((self.e_buy_price >= self.d_cur_price  >=  self.s_buy_price) and result == -1):
-                    high_price = int(self.get_high(buy_stock_code))
-                    nQty = int(total_buy_money / high_price)
-                    print(high_price, nQty)
-                    result = self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, high_price, "03", "")
-                    print(result)
-                    if(result == 0):
-                        print("매수주문을 하였습니다.")
-                        break
-                    else:
-                        print("매수주문을 실패하였습니다.")
-                        break
-            #else:
-            #   break
-            time.sleep(2)
+            if (s_buy_close_price_t > self.e_buy_price):
+                self.s_buy_price = int(self.e_buy_price)
+                self.e_buy_price = int(s_buy_close_price_t)
+            else:
+                self.s_buy_price = int(s_buy_close_price_t)
+                self.e_buy_price = int(self.e_buy_price)
+
+            # 금일 시가 조회
+            self.d_open_price = int(self.get_start_price(buy_stock_code, today_f)[1:])
+            # self.e_buy_price = 4050
+            print("시작가:", self.s_buy_price, ", 종료가:", self.e_buy_price, ", 당일시작가:", self.d_open_price)
+            # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
+            if(self.s_buy_price > self.d_open_price):
+                #raise Exception("Can't Buy Stock")
+                print("### 매수당일 시가가 작업 주식매수 할수 없습니다.")
+                continue
+            result = 0
+            while True:
+                now_time = int(datetime.now().strftime('%H%M%S'))
+                cur_price = self.get_cur_price(buy_stock_code)
+                if(cur_price[0] == '-' or cur_price[0] == '+'):
+                    cur_price = cur_price[1:]
+                self.d_cur_price = int(cur_price)
+                print('현재시간 : ', now_time,'현재가 : ', self.d_cur_price )
+                if(maesu_end_time >= now_time >= maesu_start_time):
+                    if((self.e_buy_price >= self.d_cur_price  >=  self.s_buy_price) and result == -1):
+                        high_price = int(self.get_high(buy_stock_code))
+                        nQty = int(total_buy_money / high_price)
+                        print(high_price, nQty)
+                        result = self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, high_price, "03", "")
+                        print(result)
+                        if(result == 0):
+                            print("매수주문을 하였습니다.")
+                            break
+                        else:
+                            print("매수주문을 실패하였습니다.")
+                            break
+                #else:
+                #   break
+                time.sleep(2)
 
     def load_data(self):
         try:
