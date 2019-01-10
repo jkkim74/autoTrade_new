@@ -1,22 +1,29 @@
+# -*-coding: utf-8 -
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import *
 import jk_util, util
-import os
-import json
+import sys, os, re, datetime, copy, json
+from datetime import datetime
 
 # 추가 매수 진행시 stoploss 및 stopplus 퍼센티지 변경 최대 6
 STOP_PLUS_PER_MAESU_COUNT = [ 8,                    8,                      8,                      8,                      8                  ]
 STOP_LOSS_PER_MAESU_COUNT = [ 40,                   40,                     40,                     40,                     40,                ]
 SLIPPAGE = 0.3 # 보통가로 거래하므로 매매 수수료만 적용
 CHEGYEOL_INFO_FILE_PATH = "log" + os.path.sep +  "chegyeol.json"
+JANGO_INFO_FILE_PATH =  "log" + os.path.sep + "jango.json"
 
 class Kiwoom(QAxWidget):
+    #sigBuy = pyqtSignal()
+    order_result = -1
     def __init__(self):
         super().__init__()
         self._create_kiwoom_instance()
         self.order_loop = None
         self._set_signal_slot()
         self.jangoInfo = {}  # { 'jongmokCode': { '이익실현가': 222, ...}}
+        self.michegyeolInfo = {}
+        self.chegyeolInfo = {}  # { '날짜' : [ [ '주문구분', '매도', '주문/체결시간', '체결가' , '체결수량', '미체결수량'] ] }
+        self.currentTime = datetime.now()
 
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
@@ -87,13 +94,8 @@ class Kiwoom(QAxWidget):
             pass
 
     def send_order(self, rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no):
-        result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
+        self.order_result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
-        if (result == 0):
-            if(order_type == 1):
-                print("매수주문을 하였습니다.")
-            elif(order_type == 2):
-                print("매도주문을 하였습니다.")
         self.order_loop = QEventLoop()
         self.order_loop.exec_()
 
@@ -101,12 +103,11 @@ class Kiwoom(QAxWidget):
         return self.dynamicCall("GetLoginInfo(QString)", tag)
 
     def get_chejan_data(self, fid):
-        ret = self.dynamicCall("get_chejan_data(int)", fid)
+        ret = self.dynamicCall("GetChejanData(int)", fid)
         return ret
 
     def _receive_chejan_data(self, gubun, item_cnt, fid_list):
-        print('gubun :',gubun)
-        print(fid_list)
+        print('gubun :', gubun)
         # print(util.whoami() + 'gubun: {}, itemCnt: {}, fidList: {}'
         #         .format(gubun, itemCnt, fidList))
         if (gubun == "1"):  # 잔고 정보
@@ -114,15 +115,15 @@ class Kiwoom(QAxWidget):
             # 잔고 정보에서는 매도/매수 구분이 되지 않음
 
             jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
-            boyou_suryang = int(self.get_chejan_data(jk_util.name_fid['보유수량']))
+            self.boyou_suryang = int(self.get_chejan_data(jk_util.name_fid['보유수량']))
             jumun_ganeung_suryang = int(self.get_chejan_data(jk_util.name_fid['주문가능수량']))
-            maeip_danga = int(self.get_chejan_data(jk_util.name_fid['매입단가']))
+            self.maeip_danga = int(self.get_chejan_data(jk_util.name_fid['매입단가']))
             jongmok_name = self.get_chejan_data(jk_util.name_fid['종목명']).strip()
             current_price = abs(int(self.get_chejan_data(jk_util.name_fid['현재가'])))
             print('종목코드 : ', jongmok_code)
-            print('보유수량 : ', boyou_suryang)
+            print('보유수량 : ', self.boyou_suryang)
             print('주문가능수량 : ', jumun_ganeung_suryang)
-            print('매입단가 : ', maeip_danga)
+            print('매입단가 : ', self.maeip_danga)
             print('종목명 : ', jongmok_name)
             print('현재가 : ', current_price)
             # 미체결 수량이 있는 경우 잔고 정보 저장하지 않도록 함
@@ -131,21 +132,21 @@ class Kiwoom(QAxWidget):
                     return
                     # 미체결 수량이 없으므로 정보 삭제
             del (self.michegyeolInfo[jongmok_code])
-            if (boyou_suryang == 0):
+            if (self.boyou_suryang == 0):
                 # 보유 수량이 0 인 경우 매도 수행
                 if (jongmok_code not in self.todayTradedCodeList):
                     self.todayTradedCodeList.append(jongmok_code)
                 self.jangoInfo.pop(jongmok_code)
                 self.removeConditionOccurList(jongmok_code)
-            else:
+            #else:
                 # 보유 수량이 늘었다는 것은 매수수행했다는 소리임
-                self.sigBuy.emit()
+            #   self.sigBuy.emit()
 
                 # 아래 잔고 정보의 경우 TR:계좌평가잔고내역요청 필드와 일치하게 만들어야 함
                 current_jango = {}
-                current_jango['보유수량'] = boyou_suryang
+                current_jango['보유수량'] = self.boyou_suryang
                 current_jango['매매가능수량'] = jumun_ganeung_suryang  # TR 잔고에서 매매가능 수량 이란 이름으로 사용되므로
-                current_jango['매입가'] = maeip_danga
+                current_jango['매입가'] = self.maeip_danga
                 current_jango['종목번호'] = jongmok_code
                 current_jango['종목명'] = jongmok_name.strip()
                 chegyeol_info = util.cur_date_time('%Y%m%d%H%M%S') + ":" + str(current_price)
@@ -191,38 +192,39 @@ class Kiwoom(QAxWidget):
         elif (gubun == "0"):
             print('##################### : ', gubun)
             jumun_sangtae = self.get_chejan_data(jk_util.name_fid['주문상태'])
-            jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
+            self.jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
             michegyeol_suryang = int(self.get_chejan_data(jk_util.name_fid['미체결수량']))
             print('주문상태 : ', jumun_sangtae)
-            print('종목코드 : ', jongmok_code)
+            print('종목코드 : ', self.jongmok_code)
             print('미체결수량 : ', michegyeol_suryang)
             # 주문 상태
             # 매수 시 접수(gubun-0) - 체결(gubun-0) - 잔고(gubun-1)
             # 매도 시 접수(gubun-0) - 잔고(gubun-1) - 체결(gubun-0) - 잔고(gubun-1)   순임
             # 미체결 수량 정보를 입력하여 잔고 정보 처리시 미체결 수량 있는 경우에 대한 처리를 하도록 함
-            if (jongmok_code not in self.michegyeolInfo):
-                self.michegyeolInfo[jongmok_code] = {}
-            self.michegyeolInfo[jongmok_code]['미체결수량'] = michegyeol_suryang
+            if (self.jongmok_code not in self.michegyeolInfo):
+                self.michegyeolInfo[self.jongmok_code] = {}
+            self.michegyeolInfo[self.jongmok_code]['미체결수량'] = michegyeol_suryang
 
             if (jumun_sangtae == "체결"):
-                self.makeChegyeolInfo(jongmok_code, fid_list)
+                self.makeChegyeolInfo(self.jongmok_code, fid_list)
                 self.makeChegyeolInfoFile()
                 pass
 
             pass
-        # fid_info = []
-        # fid_info = fid_list.split(';')
-        # for fid in fid_info:
-        #      print(fid , self.get_chejan_data(fid))
-        #print(self.get_chejan_data(9203))
-        # print(self.get_chejan_data(302))
-        # print(self.get_chejan_data(900))
-        # print(self.get_chejan_data(901))
-        if(self.michegyeolInfo[jongmok_code]['미체결수량'] == 0):
+
+        print('michegyeolInfo : ', self.michegyeolInfo)
+        if(len(self.michegyeolInfo) == 0):
             try:
-                 self.order_loop.exit()
+                self.order_loop.exit()
             except:
-                 pass
+                pass
+        else:
+            print('미체결수량 : ', self.michegyeolInfo[self.jongmok_code]['미체결수량'])
+            if(self.michegyeolInfo[self.jongmok_code]['미체결수량'] == 0):
+                try:
+                    self.order_loop.exit()
+                except:
+                    pass
 
     def _get_repeat_cnt(self, trcode, rqname):
         ret = self.dynamicCall("GetRepeatCnt(QString, QString)", trcode, rqname)
@@ -331,4 +333,113 @@ class Kiwoom(QAxWidget):
         # print(util.whoami())
         with open(CHEGYEOL_INFO_FILE_PATH, 'w', encoding = 'utf8' ) as f:
             f.write(json.dumps(self.chegyeolInfo, ensure_ascii= False, indent= 2, sort_keys = True ))
+        pass
+
+    def makeChegyeolInfo(self, jongmok_code, fidList):
+        fids = fidList.split(";")
+        printData = ""
+        info = []
+
+        # 미체결 수량이 0 이 아닌 경우 다시 체결 정보가 올라 오므로 0인경우 처리 안함 
+        michegyeol_suryung = int(self.get_chejan_data(jk_util.name_fid['미체결수량']).strip())
+        if (michegyeol_suryung != 0):
+            return
+        nFid = jk_util.name_fid['매도매수구분']
+        result = self.get_chejan_data(nFid).strip()
+        maedo_maesu_gubun = '매도' if result == '1' else '매수'
+        # 첫 매수시는 잔고 정보가 없을 수 있으므로 
+        current_jango = self.jangoInfo.get(jongmok_code, {})
+
+        #################################################################################################
+        # 사용자 정의 컬럼 수익과 수익율 필드 채움 
+        if (maedo_maesu_gubun == '매도'):
+            # 체결가를 통해 수익율 필드 업데이트 
+            current_price = int(self.get_chejan_data(jk_util.name_fid['체결가']).strip())
+            self.calculateSuik(jongmok_code, current_price)
+
+            # 매도시 체결정보는 수익율 필드가 존재 
+            profit = current_jango.get('수익', '0')
+            profit_percent = current_jango.get('수익율', '0')
+            chumae_count = int(current_jango.get('매수횟수', '0'))
+            maedo_type = current_jango.get('매도중', '')
+            if (maedo_type == ''):
+                maedo_type = '수동매도'
+            info.append('{0:>10}'.format(profit_percent))
+            info.append('{0:>10}'.format(profit))
+            info.append(' 매수횟수: {0:>1} '.format(chumae_count))
+            info.append(' {0} '.format(maedo_type))
+            pass
+        elif (maedo_maesu_gubun == '매수'):
+            # 매수시 체결정보는 수익율 / 수익 필드가  
+            info.append('{0:>10}'.format('0'))
+            info.append('{0:>10}'.format('0'))
+            # 체결시는 매수 횟수 정보가 업데이트 되지 않았기 때문에 +1 해줌  
+            chumae_count = int(current_jango.get('매수횟수', '0'))
+            info.append(' 매수횟수: {0:>1} '.format(chumae_count + 1))
+            info.append(' {0} '.format('(단순매수)'))
+
+        #################################################################################################
+        # kiwoom api 체결 정보 필드 
+        for col_name in jk_util.dict_jusik["체결정보"]:
+            nFid = None
+            result = ""
+            if (col_name not in jk_util.name_fid):
+                continue
+
+            nFid = jk_util.name_fid[col_name]
+
+            if (str(nFid) in fids):
+                result = self.get_chejan_data(nFid).strip()
+                if (col_name == '종목코드'):
+                    result = result[1:]
+                if (col_name == '체결가'):
+                    result = '{0:>10}'.format(result)
+
+                if (col_name == '체결량' or col_name == '미체결수량'):
+                    result = '{0:>7}'.format(result)
+
+                info.append(' {} '.format(result))
+                printData += col_name + ": " + result + ", "
+
+        current_date = self.currentTime.date().strftime('%y%m%d')
+
+        if (current_date not in self.chegyeolInfo):
+            self.chegyeolInfo[current_date] = []
+
+            #################################################################################################
+        # 매도시 매수 이력 정보 필드 
+        if (maedo_maesu_gubun == '매도'):
+            info.append(' ' + '\\t'.join(current_jango['체결가/체결시간']))
+            pass
+
+        self.chegyeolInfo[current_date].append('|'.join(info))
+        util.save_log(printData, "*체결정보", folder="log")
+        pass
+
+    @pyqtSlot()
+    def makeJangoInfoFile(self):
+        print(util.whoami())
+        remove_keys = [ '매도호가1','매도호가2', '매도호가수량1', '매도호가수량2', '매도호가총잔량',
+                        '매수호가1', '매수호가2', '매수호가수량1', '매수호가수량2', '매수호가수량3', '매수호가수량4', '매수호가총잔량',
+                        '현재가', '호가시간', '세금', '전일종가', '현재가', '종목번호', '수익율', '수익', '잔고' , '매도중', '시가', '고가', '저가', '장구분',
+                        '거래량', '등락율', '전일대비', '기준가', '상한가', '하한가', '5분봉타임컷기준' ]
+        temp = copy.deepcopy(self.jangoInfo)
+        # 불필요 필드 제거
+        for jongmok_code, contents in temp.items():
+            for key in remove_keys:
+                if( key in contents):
+                    del contents[key]
+
+        with open(JANGO_INFO_FILE_PATH, 'w', encoding = 'utf8' ) as f:
+            f.write(json.dumps(temp, ensure_ascii= False, indent= 2, sort_keys = True ))
+        pass
+
+    def calculateSuik(self, jongmok_code, current_price):
+        current_jango = self.jangoInfo[jongmok_code]
+        maeip_price = abs(int(current_jango['매입가']))
+        boyou_suryang = int(current_jango['보유수량'])
+
+        suik_price = round( (current_price - maeip_price) * boyou_suryang , 2)
+        current_jango['수익'] = suik_price
+        current_jango['수익율'] = round( ( (current_price-maeip_price)  / maeip_price ) * 100 , 2)
         pass

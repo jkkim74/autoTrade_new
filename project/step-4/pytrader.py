@@ -13,12 +13,14 @@ s_year_date = '2019-01-01';
 buy_stock_code_list = ['033180','046940']
 total_buy_money = 20000000
 maesu_start_time = 90000
-maesu_end_time  = 10000
-maemae_logic = 'S' # 'S':시가갭매매 'R':램덤매매
+maesu_end_time  = 152000
+maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
+order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader:
     def __init__(self):
         self.kiwoom = Kiwoom()
         self.kiwoom.comm_connect()
+        self.order_type = 1      #1:매수,2:매도
 
     def get_account(self):
         account_list = self.kiwoom.get_login_info("ACCNO")
@@ -127,7 +129,7 @@ class PyTrader:
                 #raise Exception("Can't Buy Stock")
                 print("### 매수당일 시가가 작업 주식매수 할수 없습니다.")
                 continue
-            result = 0
+            result = -1
             while True:
                 now_time = int(datetime.now().strftime('%H%M%S'))
                 cur_price = self.get_cur_price(buy_stock_code)
@@ -136,21 +138,56 @@ class PyTrader:
                 self.d_cur_price = int(cur_price)
                 print('현재시간 : ', now_time,'현재가 : ', self.d_cur_price )
                 if(maesu_end_time >= now_time >= maesu_start_time):
-                    if((self.e_buy_price >= self.d_cur_price  >=  self.s_buy_price) and result == -1):
+                    if((self.e_buy_price >= self.d_cur_price  >=  self.s_buy_price) and (result == -1)):
                         high_price = int(self.get_high(buy_stock_code))
                         nQty = int(total_buy_money / high_price)
                         print(high_price, nQty)
-                        result = self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, high_price, "03", "")
-                        print(result)
-                        if(result == 0):
-                            print("매수주문을 하였습니다.")
-                            break
+                        #TEST
+                        #high_price = 5690
+                        #nQty = 1
+                        self.kiwoom.send_order("send_order", "0101", account, self.order_type, buy_stock_code, nQty, high_price, order_method, "")
+                        result = self.kiwoom.order_result
+                        print('매수주문결과 : ', result)
+                        if (result == 0 or result == 1):
+                            if (self.order_type == 1):
+                                print("매수주문을 하였습니다.")
+                            self._stock_mado_proc(account,buy_stock_code)
                         else:
-                            print("매수주문을 실패하였습니다.")
-                            break
-                #else:
-                #   break
-                time.sleep(2)
+                            print("매수 실패하였습니다.")
+                time.sleep(1)
+
+    def _stock_mado_proc(self, account, code):
+        print('매도 :', account, code)
+        maeip_danga = self.kiwoom.maeip_danga
+        boyou_suryang = self.kiwoom.boyou_suryang
+        maedo_price = self._get_maedo_price(maeip_danga)
+        print(maeip_danga, boyou_suryang, maedo_price)
+        self.kiwoom.send_order("send_order", "0101", account, 2, code, boyou_suryang, maedo_price, '00', "")
+        result = self.kiwoom.order_result
+        if (result == 0):
+            print("매도주문을 하였습니다.")
+        else:
+            print("매도 실패하였습니다.")
+
+    def _get_maedo_price(self, price):
+        s_price = int(price * 1.02)
+        if (1000 <= s_price < 5000):
+            r_price = round(s_price, -1)
+        elif (5000 <= s_price < 10000):
+            r_price = round(s_price, -1)
+        elif (10000 <= s_price < 50000):
+            r_price = round(s_price, -2)
+        elif (50000 <= s_price < 100000):
+            r_price = round(s_price, -2)
+        elif (100000 <= s_price < 500000):
+            dif = s_price % 500
+            r_price = s_price - dif
+        elif (s_price >= 500000):
+            r_price = round(s_price, -3)
+        else:
+            r_price = s_price
+        return r_price
+
 
     def load_data(self):
         try:
