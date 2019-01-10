@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62470a7c-b0e5-44b2-b959-47864ba5714d" name="Default" comment="자동매매매,시간,날짜 루프 적용">
+      <change beforePath="$PROJECT_DIR$/.idea/Lab07.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lab07.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/step-4/jkStockNews.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/jkStockNews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/step-4/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/step-4/pymon.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/pymon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/step-4/pytrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/pytrader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/step-4/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/util.py" afterDir="false" />
     </list>
     <ignored path="D:\git\autoTrade\.idea\shelf/" />
     <ignored path="D:\util\autoTrade_new\.idea\shelf/" />
@@ -14,13 +19,37 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="357267684">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="192" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="192" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            <state relative-caret-position="771">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -28,32 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1728">
-              <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/step-4/jk_util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2169">
-              <caret line="269" column="22" selection-start-line="269" selection-start-column="18" selection-end-line="269" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/step-4/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" selection-start-line="8" selection-end-line="25" selection-end-column="22" />
+            <state relative-caret-position="201">
+              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -64,29 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/step-4/jkAtm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" selection-start-line="12" selection-end-line="17" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/step-3/pymon.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/step-4/pytrader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="145" column="42" lean-forward="true" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="42" />
+            <state relative-caret-position="912">
+              <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -97,8 +84,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/step-4/kiwoom.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-299">
-              <caret line="95" column="18" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="18" />
+            <state relative-caret-position="165">
+              <caret line="110" column="20" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="20" />
+              <folding>
+                <element signature="e#21#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/step-4/pytrader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2315">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/step-4/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="684">
+              <caret line="66" column="46" lean-forward="true" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+              <folding>
+                <element signature="e#23#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,6 +155,9 @@
       <find>order_type</find>
       <find>send_order</find>
       <find>order_method</find>
+      <find>util</find>
+      <find>prev_bus_day</find>
+      <find>load_data</find>
     </findStrings>
     <replaceStrings>
       <replace>jk_util</replace>
@@ -186,13 +203,13 @@
         <option value="$PROJECT_DIR$/project/step-4/stockInfo.py" />
         <option value="$PROJECT_DIR$/project/step-4/jkAtm.py" />
         <option value="$PROJECT_DIR$/project/step-4/StockError.py" />
-        <option value="$PROJECT_DIR$/project/step-4/util.py" />
         <option value="$PROJECT_DIR$/project/step-4/jk_util.py" />
-        <option value="$PROJECT_DIR$/project/step-4/pymon.py" />
         <option value="$PROJECT_DIR$/project/step-4/test.py" />
         <option value="$PROJECT_DIR$/project/step-4/kiwoom.py" />
-        <option value="$PROJECT_DIR$/project/step-4/pytrader.py" />
         <option value="$PROJECT_DIR$/project/step-4/jkStockNews.py" />
+        <option value="$PROJECT_DIR$/project/step-4/util.py" />
+        <option value="$PROJECT_DIR$/project/step-4/pytrader.py" />
+        <option value="$PROJECT_DIR$/project/step-4/pymon.py" />
       </list>
     </option>
   </component>
@@ -208,28 +225,21 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="autoTrade_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autoTrade_new" type="462c0819:PsiDirectoryNode" />
+              <item name="autoTrade" type="b2602c69:ProjectViewProjectNode" />
+              <item name="autoTrade" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="autoTrade_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autoTrade_new" type="462c0819:PsiDirectoryNode" />
+              <item name="autoTrade" type="b2602c69:ProjectViewProjectNode" />
+              <item name="autoTrade" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="autoTrade_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autoTrade_new" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="step-3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="autoTrade_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="autoTrade_new" type="462c0819:PsiDirectoryNode" />
+              <item name="autoTrade" type="b2602c69:ProjectViewProjectNode" />
+              <item name="autoTrade" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="step-4" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -237,6 +247,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -264,7 +275,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.jkStockNews">
+  <component name="RunManager" selected="Python.pytrader">
     <configuration name="jkAtm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Lab07" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -430,9 +441,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.pymon" />
         <item itemvalue="Python.jkStockNews" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.pymon" />
         <item itemvalue="Python.jkAtm" />
         <item itemvalue="Python.stockInfo" />
       </list>
@@ -486,12 +497,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11064278" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11064278" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37093276" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37024972" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -717,9 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/step-4/util.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/step-3/pymon.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -729,8 +737,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/jkAtm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" selection-start-line="12" selection-end-line="17" selection-end-column="39" />
+        <state relative-caret-position="912">
+          <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -741,52 +749,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" selection-start-line="8" selection-end-line="25" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="771">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/jk_util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2169">
-          <caret line="269" column="22" selection-start-line="269" selection-start-column="18" selection-end-line="269" selection-end-column="22" />
+        <state relative-caret-position="3819">
+          <caret line="201" column="4" selection-start-line="201" selection-start-column="4" selection-end-line="201" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/kiwoom.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-299">
-          <caret line="95" column="18" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="18" />
+        <state relative-caret-position="165">
+          <caret line="110" column="20" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="20" />
+          <folding>
+            <element signature="e#21#53#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/pytrader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="145" column="42" lean-forward="true" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="42" />
+        <state relative-caret-position="-2315">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/step-4/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="66" column="46" lean-forward="true" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <folding>
+            <element signature="e#23#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1728">
-          <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+        <state relative-caret-position="201">
+          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -3,17 +3,17 @@ from PyQt5.QtWidgets import *
 from kiwoom import *
 from datetime import datetime
 import FinanceDataReader as fdr
-import pandas as pd
 import time
 import pickle
+import util, jk_util
 
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-buy_stock_code_list = ['033180','046940']
+global_buy_stock_code_list = ['033180','046940']
 total_buy_money = 20000000
 maesu_start_time = 90000
-maesu_end_time  = 152000
+maesu_end_time  = 100000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
 order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader:
@@ -42,29 +42,6 @@ class PyTrader:
         self.kiwoom.comm_rq_data("opt10001_req", "opt10001", 0, "0101")
         return self.kiwoom.cur_price
 
-    def get_prev_date(self):
-        # 금일날짜
-        today = datetime.today().strftime("%Y%m%d")
-        # 영업일 하루전날짜
-        df_hdays = pd.read_excel("data.xls")
-        hdays = df_hdays['일자 및 요일'].str.extract('(\d{4}-\d{2}-\d{2})', expand=False)
-        hdays = pd.to_datetime(hdays)
-        hdays.name = '날짜'
-        mdays = pd.date_range('2019-01-01', '2019-12-31', freq='B')
-        #print(mdays)
-        mdays = mdays.drop(hdays)
-        #f_mdays = mdays.to_frame(index=True)
-        #print(f_mdays)
-        # 개장일을 index로 갖는 DataFrame
-        #data = {'values': range(1, 31)}
-        #df_sample = pd.DataFrame(data, index=pd.date_range('2019-01-01', '2019-01-31'))
-        df_mdays = pd.DataFrame({'date':mdays})
-        df_mdays_list = df_mdays['date'].tolist()
-        for i, df_day in enumerate(df_mdays_list):
-            if(df_day.__format__('%Y%m%d') == today):
-                self.prev_bus_day_1 = df_mdays_list[i - 1].__format__('%Y-%m-%d')
-                self.prev_bus_day_2 = df_mdays_list[i - 2].__format__('%Y-%m-%d')
-
     def run(self):
         if(maemae_logic == 'S'):
             self.S_mae_mae()
@@ -88,16 +65,18 @@ class PyTrader:
         # 금일날짜
         today   = datetime.today().strftime("%Y-%m-%d")
         today_f = datetime.today().strftime("%Y%m%d")
-        self.get_prev_date()
-        #data = self.load_data()
-        #codes = [x[0] for x in data]
-        #print(data)
-        #print(codes)
-        s_standard_date = self.prev_bus_day_2
-        e_standard_date = self.prev_bus_day_1
+        prev_bus_day = util.get_prev_date()
+        # 조건검색을 통해 저장한 데이타 가져오기
+        local_buy_stock_code_list = self.load_data()
+        # codes = [x[0] for x in data]
+        # print(data)
+        # print(codes)
+        # end
+        s_standard_date = prev_bus_day[1]
+        e_standard_date = prev_bus_day[0]
         print('5%이상상승당일 : ', s_standard_date, '시가갭날짜 : ', e_standard_date)
 
-        for buy_stock_code in buy_stock_code_list:
+        for buy_stock_code in local_buy_stock_code_list:
             # 대상종목의 매수가 산정을 위한 가격데이타 수집
             df = fdr.DataReader(buy_stock_code, s_year_date)
             print('5%이상상승당일 종가 : ', df['Close'][s_standard_date])  # 5%이상상승당일 종가

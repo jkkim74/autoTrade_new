@@ -3,6 +3,7 @@ import inspect
 from datetime import datetime
 import os
 import os.path
+import pandas as pd
 
 def save_log(contents, subject="None", folder=""):
     current_dir = os.getcwd()
@@ -43,6 +44,31 @@ def cur_month(time_string ='%y-%m'):
 def cur_time(time_string ='%H:%M:%S' ):
     cur_time = datetime.now().strftime(time_string)
     return cur_time
+
+# 주식 실거래일 구하기
+def get_prev_date():
+    # 금일날짜
+    today = datetime.today().strftime("%Y%m%d")
+    # 영업일 하루전날짜
+    df_hdays = pd.read_excel("data.xls")
+    hdays = df_hdays['일자 및 요일'].str.extract('(\d{4}-\d{2}-\d{2})', expand=False)
+    hdays = pd.to_datetime(hdays)
+    hdays.name = '날짜'
+    mdays = pd.date_range('2019-01-01', '2019-12-31', freq='B')
+    #print(mdays)
+    mdays = mdays.drop(hdays)
+    #f_mdays = mdays.to_frame(index=True)
+    #print(f_mdays)
+    # 개장일을 index로 갖는 DataFrame
+    #data = {'values': range(1, 31)}
+    #df_sample = pd.DataFrame(data, index=pd.date_range('2019-01-01', '2019-01-31'))
+    df_mdays = pd.DataFrame({'date':mdays})
+    df_mdays_list = df_mdays['date'].tolist()
+    for i, df_day in enumerate(df_mdays_list):
+        if(df_day.__format__('%Y%m%d') == today):
+            prev_bus_day_1 = df_mdays_list[i - 1].__format__('%Y-%m-%d')
+            prev_bus_day_2 = df_mdays_list[i - 2].__format__('%Y-%m-%d')
+            return (prev_bus_day_1, prev_bus_day_2)
 
 if __name__ == "__main__":
     print(cur_time())

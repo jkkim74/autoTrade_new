@@ -22,18 +22,19 @@ class PyMon:
         self.kiwoom.send_condition("0150", SEL_CONDITION_NAME, "011", 1)
         # print(self.kiwoom.condition_code_list[:-1])
         code_list = self.kiwoom.condition_code_list[:-1]
-        result = []
-        for i, code in enumerate(code_list):
-            print("%d : %d" % (i, len(code_list)))
-            if i > 100:
-                break
-
-            (per, pbr) = self.get_per_pbr(code)
-            if 2.5 <= per <= 10:
-                result.append((code, per, pbr))
-
-        data = sorted(result, key=lambda x:x[2])
-        self.dump_data(data[:30])
+        # 로직구현 필요함.
+        # result = []
+        # for i, code in enumerate(code_list):
+        #     print("%d : %d" % (i, len(code_list)))
+        #     if i > 100:
+        #         break
+        #
+        #     (per, pbr) = self.get_per_pbr(code)
+        #     if 2.5 <= per <= 10:
+        #         result.append((code, per, pbr))
+        #
+        # data = sorted(result, key=lambda x:x[2])
+        self.dump_data(code_list)
 
     def run_condition_data(self):
         self.kiwoom.get_condition_load()
