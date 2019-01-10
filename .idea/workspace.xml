@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62470a7c-b0e5-44b2-b959-47864ba5714d" name="Default" comment="자동매매매,시간,날짜 루프 적용">
-      <change afterPath="$PROJECT_DIR$/project/step-4/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Lab07.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lab07.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/step-4/kiwoom.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/kiwoom.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/step-4/pytrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/pytrader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/step-4/jkStockNews.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/step-4/jkStockNews.py" afterDir="false" />
     </list>
     <ignored path="D:\git\autoTrade\.idea\shelf/" />
     <ignored path="D:\util\autoTrade_new\.idea\shelf/" />
@@ -20,6 +16,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1728">
+              <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/step-4/jk_util.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/step-4/pytrader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="136" column="45" lean-forward="true" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
+            <state relative-caret-position="355">
+              <caret line="145" column="42" lean-forward="true" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="42" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -164,7 +184,6 @@
         <option value="$PROJECT_DIR$/class04/step-1/run.py" />
         <option value="$PROJECT_DIR$/class04/condition-3/run.py" />
         <option value="$PROJECT_DIR$/project/step-4/stockInfo.py" />
-        <option value="$PROJECT_DIR$/project/step-4/jkStockNews.py" />
         <option value="$PROJECT_DIR$/project/step-4/jkAtm.py" />
         <option value="$PROJECT_DIR$/project/step-4/StockError.py" />
         <option value="$PROJECT_DIR$/project/step-4/util.py" />
@@ -173,6 +192,7 @@
         <option value="$PROJECT_DIR$/project/step-4/test.py" />
         <option value="$PROJECT_DIR$/project/step-4/kiwoom.py" />
         <option value="$PROJECT_DIR$/project/step-4/pytrader.py" />
+        <option value="$PROJECT_DIR$/project/step-4/jkStockNews.py" />
       </list>
     </option>
   </component>
@@ -244,7 +264,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pytrader">
+  <component name="RunManager" selected="Python.jkStockNews">
     <configuration name="jkAtm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Lab07" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -410,10 +430,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.jkStockNews" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.pymon" />
         <item itemvalue="Python.jkAtm" />
-        <item itemvalue="Python.jkStockNews" />
         <item itemvalue="Python.stockInfo" />
       </list>
     </recent_temporary>
@@ -683,26 +703,6 @@
     <entry file="file://$PROJECT_DIR$/project/step-4/StockError.py" />
     <entry file="file://D:/ProgramData/Lib/inspect.py" />
     <entry file="file://$PROJECT_DIR$/project/step-4/kw_util.py" />
-    <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="150" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1594">
-          <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/step-3/kiwoom.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -763,10 +763,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/step-4/pytrader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="136" column="45" lean-forward="true" selection-start-line="136" selection-start-column="45" selection-end-line="136" selection-end-column="45" />
+        <state relative-caret-position="355">
+          <caret line="145" column="42" lean-forward="true" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="42" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/step-4/pymon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1728">
+          <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/step-4/jkStockNews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
