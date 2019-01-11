@@ -46,7 +46,7 @@ def cur_time(time_string ='%H:%M:%S' ):
     return cur_time
 
 # 주식 실거래일 구하기
-def get_prev_date():
+def get_prev_date(dif1, dif2):
     # 금일날짜
     today = datetime.today().strftime("%Y%m%d")
     # 영업일 하루전날짜
@@ -66,8 +66,8 @@ def get_prev_date():
     df_mdays_list = df_mdays['date'].tolist()
     for i, df_day in enumerate(df_mdays_list):
         if(df_day.__format__('%Y%m%d') == today):
-            prev_bus_day_1 = df_mdays_list[i - 1].__format__('%Y-%m-%d')
-            prev_bus_day_2 = df_mdays_list[i - 2].__format__('%Y-%m-%d')
+            prev_bus_day_1 = df_mdays_list[i - dif1].__format__('%Y-%m-%d')
+            prev_bus_day_2 = df_mdays_list[i - dif2].__format__('%Y-%m-%d')
             return (prev_bus_day_1, prev_bus_day_2)
 
 if __name__ == "__main__":

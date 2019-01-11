@@ -70,7 +70,7 @@ class PyTrader:
         # 금일날짜
         today   = datetime.today().strftime("%Y-%m-%d")
         today_f = datetime.today().strftime("%Y%m%d")
-        prev_bus_day = util.get_prev_date()
+        prev_bus_day = util.get_prev_date(1,2)
         # 조건검색을 통해 저장한 데이타 가져오기
         local_buy_stock_code_list = self.load_data()
         # codes = [x[0] for x in data]

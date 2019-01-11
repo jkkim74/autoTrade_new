@@ -22,6 +22,10 @@ class PyMon:
         self.kiwoom.send_condition("0150", SEL_CONDITION_NAME, "011", 1)
         # print(self.kiwoom.condition_code_list[:-1])
         code_list = self.kiwoom.condition_code_list[:-1]
+        print("조건검색결과 주식 : ", code_list, len(code_list))
+        if len(code_list) == 0:
+            print("해당하는 조건검색의 결과 주식이 없습니다.")
+            pass
         # 로직구현 필요함.
         # result = []
         # for i, code in enumerate(code_list):
