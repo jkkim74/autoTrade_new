@@ -11,11 +11,11 @@ s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
 global_buy_stock_code_list = ['033180','046940']
-total_buy_money = 20000000
+total_buy_money = 30000#20000000
 maesu_start_time = 90000
-maesu_end_time  = 100000
+maesu_end_time  = 150000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
-order_method = "00" # "00":보통매매, "03":시장가매매
+order_method = "03" # "00":보통매매, "03":시장가매매
 class PyTrader:
     def __init__(self):
         self.kiwoom = Kiwoom()
@@ -53,12 +53,17 @@ class PyTrader:
         #    print(code)
     def R_mae_mae(self):
         account = self.get_account()
-        nQty = 2
-        stock_price = '1235'
-        buy_stock_code = '033170'
-        self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
-        # if (result == 0):
-        #     print("매수주문을 하였습니다.")
+        nQty = 1
+        stock_price = '17100'
+        # 조건검색을 통해 저장한 데이타 가져오기
+        local_buy_stock_code_list = self.load_data()
+        buy_stock_code = local_buy_stock_code_list[0]
+        self.kiwoom.send_order("send_order", "0101", account, 2, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
+        result = self.kiwoom.order_result
+        if (result == 0):
+            print("매도주문을 하였습니다.")
+        else:
+            print("매도 실패하였습니다.")
 
     def S_mae_mae(self):
         account = self.get_account()
@@ -75,7 +80,6 @@ class PyTrader:
         s_standard_date = prev_bus_day[1]
         e_standard_date = prev_bus_day[0]
         print('5%이상상승당일 : ', s_standard_date, '시가갭날짜 : ', e_standard_date)
-
         for buy_stock_code in local_buy_stock_code_list:
             # 대상종목의 매수가 산정을 위한 가격데이타 수집
             df = fdr.DataReader(buy_stock_code, s_year_date)
@@ -100,7 +104,10 @@ class PyTrader:
                 self.e_buy_price = int(self.e_buy_price)
 
             # 금일 시가 조회
-            self.d_open_price = int(self.get_start_price(buy_stock_code, today_f)[1:])
+            self.d_open_price = self.get_start_price(buy_stock_code, today_f)
+            if (self.d_open_price[0] == '-' or self.d_open_price[0] == '+'):
+                self.d_open_price = self.d_open_price[1:]
+            self.d_open_price = int(self.d_open_price)
             # self.e_buy_price = 4050
             print("시작가:", self.s_buy_price, ", 종료가:", self.e_buy_price, ", 당일시작가:", self.d_open_price)
             # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
@@ -109,6 +116,7 @@ class PyTrader:
                 print("### 매수당일 시가가 작업 주식매수 할수 없습니다.")
                 continue
             result = -1
+            # ############### 주식주문 스타트 #################
             while True:
                 now_time = int(datetime.now().strftime('%H%M%S'))
                 cur_price = self.get_cur_price(buy_stock_code)
@@ -130,23 +138,28 @@ class PyTrader:
                         if (result == 0 or result == 1):
                             if (self.order_type == 1):
                                 print("매수주문을 하였습니다.")
-                            self._stock_mado_proc(account,buy_stock_code)
+                                break
                         else:
                             print("매수 실패하였습니다.")
-                time.sleep(1)
+                            break
+                time.sleep(1.5)
+            ############################### 주식 주문 종료 #########################################
+            ############################### 확정 매도 주문 #########################################
+            if (result == 0 or result == 1):#매수주문 성공시에 확정매도 처리
+                self._stock_mado_proc(account, buy_stock_code)
 
     def _stock_mado_proc(self, account, code):
         print('매도 :', account, code)
         maeip_danga = self.kiwoom.maeip_danga
-        boyou_suryang = self.kiwoom.boyou_suryang
+        jumun_ganeung_suryang = self.kiwoom.jumun_ganeung_suryang
         maedo_price = self._get_maedo_price(maeip_danga)
-        print(maeip_danga, boyou_suryang, maedo_price)
-        self.kiwoom.send_order("send_order", "0101", account, 2, code, boyou_suryang, maedo_price, '00', "")
+        print(maeip_danga, jumun_ganeung_suryang, maedo_price)
+        self.kiwoom.send_order("send_order", "0101", account, 2, code, jumun_ganeung_suryang, maedo_price, '00', "")#2:매도
         result = self.kiwoom.order_result
         if (result == 0):
-            print("매도주문을 하였습니다.")
+            print("매도처리를 하였습니다.")
         else:
-            print("매도 실패하였습니다.")
+            print("매도처리 실패하였습니다.")
 
     def _get_maedo_price(self, price):
         s_price = int(price * 1.02)

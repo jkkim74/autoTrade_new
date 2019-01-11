@@ -96,6 +96,7 @@ class Kiwoom(QAxWidget):
     def send_order(self, rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no):
         self.order_result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
+
         self.order_loop = QEventLoop()
         self.order_loop.exec_()
 
@@ -116,13 +117,13 @@ class Kiwoom(QAxWidget):
 
             jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
             self.boyou_suryang = int(self.get_chejan_data(jk_util.name_fid['보유수량']))
-            jumun_ganeung_suryang = int(self.get_chejan_data(jk_util.name_fid['주문가능수량']))
+            self.jumun_ganeung_suryang = int(self.get_chejan_data(jk_util.name_fid['주문가능수량']))
             self.maeip_danga = int(self.get_chejan_data(jk_util.name_fid['매입단가']))
             jongmok_name = self.get_chejan_data(jk_util.name_fid['종목명']).strip()
             current_price = abs(int(self.get_chejan_data(jk_util.name_fid['현재가'])))
             print('종목코드 : ', jongmok_code)
             print('보유수량 : ', self.boyou_suryang)
-            print('주문가능수량 : ', jumun_ganeung_suryang)
+            print('주문가능수량 : ', self.jumun_ganeung_suryang)
             print('매입단가 : ', self.maeip_danga)
             print('종목명 : ', jongmok_name)
             print('현재가 : ', current_price)
@@ -145,7 +146,7 @@ class Kiwoom(QAxWidget):
                 # 아래 잔고 정보의 경우 TR:계좌평가잔고내역요청 필드와 일치하게 만들어야 함
                 current_jango = {}
                 current_jango['보유수량'] = self.boyou_suryang
-                current_jango['매매가능수량'] = jumun_ganeung_suryang  # TR 잔고에서 매매가능 수량 이란 이름으로 사용되므로
+                current_jango['매매가능수량'] = self.jumun_ganeung_suryang  # TR 잔고에서 매매가능 수량 이란 이름으로 사용되므로
                 current_jango['매입가'] = self.maeip_danga
                 current_jango['종목번호'] = jongmok_code
                 current_jango['종목명'] = jongmok_name.strip()
@@ -194,7 +195,11 @@ class Kiwoom(QAxWidget):
             jumun_sangtae = self.get_chejan_data(jk_util.name_fid['주문상태'])
             self.jongmok_code = self.get_chejan_data(jk_util.name_fid['종목코드'])[1:]
             michegyeol_suryang = int(self.get_chejan_data(jk_util.name_fid['미체결수량']))
-            print('주문상태 : ', jumun_sangtae)
+            maedo_maesu_gubun = self.get_chejan_data(jk_util.name_fid['매도매수구분'])
+            if maedo_maesu_gubun == "1":
+                print('주문상태 : ', '매도', jumun_sangtae)
+            else:
+                print('주문상태 : ', '매수', jumun_sangtae)
             print('종목코드 : ', self.jongmok_code)
             print('미체결수량 : ', michegyeol_suryang)
             # 주문 상태
@@ -212,7 +217,6 @@ class Kiwoom(QAxWidget):
 
             pass
 
-        print('michegyeolInfo : ', self.michegyeolInfo)
         if(len(self.michegyeolInfo) == 0):
             try:
                 self.order_loop.exit()
