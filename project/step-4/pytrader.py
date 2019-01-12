@@ -70,11 +70,15 @@ class PyTrader:
         # 금일날짜
         today   = datetime.today().strftime("%Y%m%d")
         today_f = datetime.today().strftime("%Y%m%d")
-        prev_bus_day = util.get_prev_date(0,1,today)
+        prev_bus_day = util.get_prev_date(1,2,today)
         if prev_bus_day == None:
             print('매수일이 아닙니다.')
+            prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 1))
+            if prev_bus_day == None:
+                prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 2))
         # 조건검색을 통해 저장한 데이타 가져오기
         local_buy_stock_code_list = self.load_data()
+        print('조건검색 코드 :',local_buy_stock_code_list)
         # codes = [x[0] for x in data]
         # print(data)
         # print(codes)
@@ -83,28 +87,8 @@ class PyTrader:
         e_standard_date = prev_bus_day[0]
         print('5%이상상승당일 : ', s_standard_date, '시가갭날짜 : ', e_standard_date)
         for buy_stock_code in local_buy_stock_code_list:
-            # 대상종목의 매수가 산정을 위한 가격데이타 수집
-            df = fdr.DataReader(buy_stock_code, s_year_date)
-            print('5%이상상승당일 종가 : ', df['Close'][s_standard_date])  # 5%이상상승당일 종가
-            print('시가갭날 시가 : ', df['Open'][e_standard_date])  # 매수전날 시가
-            print('시가갭날 종가 : ', df['Close'][e_standard_date])  # 매수전날 종가
-
-            # 매수가능 구간 가격 조회
-            s_buy_close_price_t = df['Close'][s_standard_date]
-            e_buy_open_price_t = df['Open'][e_standard_date]
-            e_buy_close_price_t = df['Close'][e_standard_date]
-            if (e_buy_open_price_t > e_buy_close_price_t):
-                self.e_buy_price = int(e_buy_close_price_t)
-            else:
-                self.e_buy_price = int(e_buy_open_price_t)
-
-            if (s_buy_close_price_t > self.e_buy_price):
-                self.s_buy_price = int(self.e_buy_price)
-                self.e_buy_price = int(s_buy_close_price_t)
-            else:
-                self.s_buy_price = int(s_buy_close_price_t)
-                self.e_buy_price = int(self.e_buy_price)
-
+            # 주식 bus 날짜 정보
+            self._stock_bus_info(buy_stock_code, s_standard_date, e_standard_date)
             # 금일 시가 조회
             self.d_open_price = self.get_start_price(buy_stock_code, today_f)
             if (self.d_open_price[0] == '-' or self.d_open_price[0] == '+'):
@@ -149,6 +133,29 @@ class PyTrader:
             ############################### 확정 매도 주문 #########################################
             if (result == 0 or result == 1):#매수주문 성공시에 확정매도 처리
                 self._stock_mado_proc(account, buy_stock_code)
+
+    def _stock_bus_info(self,buy_stock_code,s_standard_date,e_standard_date):
+        # 대상종목의 매수가 산정을 위한 가격데이타 수집
+        df = fdr.DataReader(buy_stock_code, s_year_date)
+        print('5%이상상승당일 종가 : ', df['Close'][s_standard_date])  # 5%이상상승당일 종가
+        print('시가갭날 시가 : ', df['Open'][e_standard_date])  # 매수전날 시가
+        print('시가갭날 종가 : ', df['Close'][e_standard_date])  # 매수전날 종가
+
+        # 매수가능 구간 가격 조회
+        s_buy_close_price_t = df['Close'][s_standard_date]
+        e_buy_open_price_t = df['Open'][e_standard_date]
+        e_buy_close_price_t = df['Close'][e_standard_date]
+        if (e_buy_open_price_t > e_buy_close_price_t):
+            self.e_buy_price = int(e_buy_close_price_t)
+        else:
+            self.e_buy_price = int(e_buy_open_price_t)
+
+        if (s_buy_close_price_t > self.e_buy_price):
+            self.s_buy_price = int(self.e_buy_price)
+            self.e_buy_price = int(s_buy_close_price_t)
+        else:
+            self.s_buy_price = int(s_buy_close_price_t)
+            self.e_buy_price = int(self.e_buy_price)
 
     def _stock_mado_proc(self, account, code):
         print('매도 :', account, code)
