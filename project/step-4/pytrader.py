@@ -15,7 +15,7 @@ total_buy_money = 30000#20000000
 maesu_start_time = 90000
 maesu_end_time  = 150000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
-order_method = "03" # "00":보통매매, "03":시장가매매
+order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader:
     def __init__(self):
         self.kiwoom = Kiwoom()
@@ -68,9 +68,11 @@ class PyTrader:
     def S_mae_mae(self):
         account = self.get_account()
         # 금일날짜
-        today   = datetime.today().strftime("%Y-%m-%d")
+        today   = datetime.today().strftime("%Y%m%d")
         today_f = datetime.today().strftime("%Y%m%d")
-        prev_bus_day = util.get_prev_date(1,2)
+        prev_bus_day = util.get_prev_date(0,1,today)
+        if prev_bus_day == None:
+            print('매수일이 아닙니다.')
         # 조건검색을 통해 저장한 데이타 가져오기
         local_buy_stock_code_list = self.load_data()
         # codes = [x[0] for x in data]

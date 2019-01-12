@@ -38,7 +38,7 @@ class PyMon:
         #         result.append((code, per, pbr))
         #
         # data = sorted(result, key=lambda x:x[2])
-        self.dump_data(code_list)
+        # self.dump_data(code_list)
 
     def run_condition_data(self):
         self.kiwoom.get_condition_load()

@@ -46,9 +46,9 @@ def cur_time(time_string ='%H:%M:%S' ):
     return cur_time
 
 # 주식 실거래일 구하기
-def get_prev_date(dif1, dif2):
+def get_prev_date(dif1, dif2, today):
     # 금일날짜
-    today = datetime.today().strftime("%Y%m%d")
+    # today = datetime.today().strftime("%Y%m%d")
     # 영업일 하루전날짜
     df_hdays = pd.read_excel("data.xls")
     hdays = df_hdays['일자 및 요일'].str.extract('(\d{4}-\d{2}-\d{2})', expand=False)
