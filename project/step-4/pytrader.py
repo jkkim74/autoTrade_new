@@ -11,7 +11,7 @@ s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
 global_buy_stock_code_list = ['033180','046940']
-total_buy_money = 30000#20000000
+total_buy_money = 30000000
 maesu_start_time = 90000
 maesu_end_time  = 150000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
@@ -117,7 +117,6 @@ class PyTrader:
                         print(high_price, nQty)
                         #TEST
                         #high_price = 5690
-                        #nQty = 1
                         self.kiwoom.send_order("send_order", "0101", account, self.order_type, buy_stock_code, nQty, high_price, order_method, "")
                         result = self.kiwoom.order_result
                         print('매수주문결과 : ', result)
