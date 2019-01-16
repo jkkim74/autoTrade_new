@@ -117,6 +117,7 @@ class PyTrader:
                         print(high_price, nQty)
                         #TEST
                         #high_price = 5690
+                        #nQty = 1
                         self.kiwoom.send_order("send_order", "0101", account, self.order_type, buy_stock_code, nQty, high_price, order_method, "")
                         result = self.kiwoom.order_result
                         print('매수주문결과 : ', result)
@@ -174,7 +175,8 @@ class PyTrader:
         if (1000 <= s_price < 5000):
             r_price = round(s_price, -1)
         elif (5000 <= s_price < 10000):
-            r_price = round(s_price, -1)
+            dif = s_price % 5
+            r_price = s_price - dif
         elif (10000 <= s_price < 50000):
             r_price = round(s_price, -2)
         elif (50000 <= s_price < 100000):
