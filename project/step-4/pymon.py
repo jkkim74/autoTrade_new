@@ -23,6 +23,10 @@ class PyMon:
         # print(self.kiwoom.condition_code_list[:-1])
         code_list = self.kiwoom.condition_code_list[:-1]
         print("조건검색결과 주식 : ", code_list, len(code_list))
+        for code in code_list:
+            code_info = self.kiwoom.get_master_code_name(code)
+            mste_info = self.kiwoom.get_master_construction(code)
+            print(code_info, mste_info)
         if len(code_list) == 0:
             print("해당하는 조건검색의 결과 주식이 없습니다.")
             pass

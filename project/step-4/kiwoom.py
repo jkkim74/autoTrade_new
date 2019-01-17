@@ -97,8 +97,9 @@ class Kiwoom(QAxWidget):
         self.order_result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
 
-        self.order_loop = QEventLoop()
-        self.order_loop.exec_()
+        if order_type != 2:
+            self.order_loop = QEventLoop()
+            self.order_loop.exec_()
 
     def get_login_info(self, tag):
         return self.dynamicCall("GetLoginInfo(QString)", tag)
