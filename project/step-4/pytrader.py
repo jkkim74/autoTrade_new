@@ -11,8 +11,8 @@ import threading
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-global_buy_stock_code_list = []#['011810']
-total_buy_money = 10000000
+global_buy_stock_code_list = ['007720']
+total_buy_money = 20000000
 maesu_start_time = 90000
 maesu_end_time  = 150000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
@@ -189,7 +189,7 @@ class PyTrader:
     def _get_maedo_price(self, price):
         s_price = int(price * 1.02)
         if (1000 <= s_price < 5000):
-            r_price = round(s_price, -1)
+            r_price = round(s_price, -1) + 5
         elif (5000 <= s_price < 10000):
             dif = s_price % 5
             r_price = s_price - dif
