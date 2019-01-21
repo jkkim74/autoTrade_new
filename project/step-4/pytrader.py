@@ -11,8 +11,8 @@ import threading
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-global_buy_stock_code_list = ['007720']
-total_buy_money = 20000000
+global_buy_stock_code_list = []
+total_buy_money = 30000000
 maesu_start_time = 90000
 maesu_end_time  = 150000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
