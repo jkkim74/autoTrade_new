@@ -11,18 +11,19 @@ import threading
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
-global_buy_stock_code_list = []
+global_buy_stock_code_list = ['126880','006890']
 total_buy_money = 30000000
 maesu_start_time = 90000
 maesu_end_time  = 150000
-maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
+maemae_logic = 'M'  # 'S':시가갭매매 'R':램덤매매, 'M':다중매매
 order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader(threading.Thread):
-    def __init__(self):
+    def __init__(self, code):
         threading.Thread.__init__(self)
         self.kiwoom = Kiwoom()
         self.kiwoom.comm_connect()
         self.order_type = 1      #1:매수,2:매도
+        self.code = code
 
     def get_account(self):
         account_list = self.kiwoom.get_login_info("ACCNO")
@@ -48,19 +49,22 @@ class PyTrader(threading.Thread):
         if(maemae_logic == 'S'):
             self.S_mae_mae()
         elif(maemae_logic == 'R'):
-            self.R_mae_mae()
+            self.R_mae_mae(self.code)
+        elif(maemae_logic == 'M'):
+            self.S_mae_mae_multi(self.code)
         #매수
         #for code in codes:
         #    self.kiwoom.send_order("send_order", "0101", account, 1, code, 10, 0, "03", "")
         #    print(code)
-    def R_mae_mae(self):
+    def R_mae_mae(self, buy_stock_code):
         account = self.get_account()
         nQty = 1
         stock_price = '17100'
         # 조건검색을 통해 저장한 데이타 가져오기
-        local_buy_stock_code_list = self.load_data()
-        buy_stock_code = local_buy_stock_code_list[0]
-        self.kiwoom.send_order("send_order", "0101", account, 2, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
+        #local_buy_stock_code_list = self.load_data()
+        #buy_stock_code = local_buy_stock_code_list[0]
+        print(buy_stock_code)
+        self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
         result = self.kiwoom.order_result
         if (result == 0):
             print("매도주문을 하였습니다.")
@@ -115,6 +119,37 @@ class PyTrader(threading.Thread):
         # for i in range(len(local_buy_stock_code_list)):
         #     threads[i].join()
 
+    def S_mae_mae_multi(self, buy_stock_code):
+        account = self.get_account()
+        # 금일날짜
+        today   = datetime.today().strftime("%Y%m%d")
+        today_f = datetime.today().strftime("%Y%m%d")
+        prev_bus_day = util.get_prev_date(1,2,today)
+        if prev_bus_day == None:
+            print('매수일이 아닙니다.')
+            prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 1))
+            if prev_bus_day == None:
+                prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 2))
+        s_standard_date = prev_bus_day[1]
+        e_standard_date = prev_bus_day[0]
+        print('5%이상상승당일 : ', s_standard_date, '시가갭날짜 : ', e_standard_date)
+
+        # 주식 bus 날짜 정보
+        self._stock_bus_info(buy_stock_code, s_standard_date, e_standard_date)
+        # 금일 시가 조회
+        self.d_open_price = self.get_start_price(buy_stock_code, today_f)
+        if (self.d_open_price[0] == '-' or self.d_open_price[0] == '+'):
+            self.d_open_price = self.d_open_price[1:]
+        self.d_open_price = int(self.d_open_price)
+        # self.e_buy_price = 4050
+        print("시작가:", self.s_buy_price, ", 종료가:", self.e_buy_price, ", 당일시작가:", self.d_open_price)
+        # 금일 시작가가 매수구간의 시작가보다 작으면 매수금지
+        if(self.s_buy_price > self.d_open_price):
+            #raise Exception("Can't Buy Stock")
+            print("### 매수당일 시가가 작업 주식매수 할수 없습니다.")
+            pass
+
+        self._stock_maemae(account,buy_stock_code)
 
     def _stock_maemae(self,account,buy_stock_code):
         result = -1
@@ -126,30 +161,30 @@ class PyTrader(threading.Thread):
                 cur_price = cur_price[1:]
             self.d_cur_price = int(cur_price)
             print('현재시간 : ', now_time, '현재가 : ', self.d_cur_price)
-            if (maesu_end_time >= now_time >= maesu_start_time):
-                if ((self.e_buy_price >= self.d_cur_price >= self.s_buy_price) and (result == -1)):
-                    high_price = int(self.get_high(buy_stock_code))
-                    nQty = int(total_buy_money / high_price)
-                    print(high_price, nQty)
-                    # TEST
-                    # high_price = 5690
-                    # nQty = 1
-                    self.kiwoom.send_order("send_order", "0101", account, self.order_type, buy_stock_code, nQty,
-                                           high_price, order_method, "")
-                    result = self.kiwoom.order_result
-                    print('매수주문결과 : ', result)
-                    if (result == 0 or result == 1):
-                        if (self.order_type == 1):
-                            print("매수주문을 하였습니다.")
-                            break
-                    else:
-                        print("매수 실패하였습니다.")
-                        break
+            # if (maesu_end_time >= now_time >= maesu_start_time):
+            #     if ((self.e_buy_price >= self.d_cur_price >= self.s_buy_price) and (result == -1)):
+            #         high_price = int(self.get_high(buy_stock_code))
+            #         nQty = int(total_buy_money / high_price)
+            #         print(high_price, nQty)
+            #         # TEST
+            #         # high_price = 5690
+            #         # nQty = 1
+            #         self.kiwoom.send_order("send_order", "0101", account, self.order_type, buy_stock_code, nQty,
+            #                                high_price, order_method, "")
+            #         result = self.kiwoom.order_result
+            #         print('매수주문결과 : ', result)
+            #         if (result == 0 or result == 1):
+            #             if (self.order_type == 1):
+            #                 print("매수주문을 하였습니다.")
+            #                 break
+            #         else:
+            #             print("매수 실패하였습니다.")
+            #             break
             time.sleep(1.5)
         ############################### 주식 주문 종료 #########################################
         ############################### 확정 매도 주문 #########################################
-        if (result == 0 or result == 1):  # 매수주문 성공시에 확정매도 처리
-            self._stock_mado_proc(account, buy_stock_code)
+        # if (result == 0 or result == 1):  # 매수주문 성공시에 확정매도 처리
+        #     self._stock_mado_proc(account, buy_stock_code)
 
     def _stock_bus_info(self,buy_stock_code,s_standard_date,e_standard_date):
         # 대상종목의 매수가 산정을 위한 가격데이타 수집
@@ -218,5 +253,14 @@ class PyTrader(threading.Thread):
             pass
 
 app = QApplication(sys.argv)
-pymon = PyTrader()
-pymon.run()
+# 조건검색을 통해 저장한 데이타 가져오기
+# local_buy_stock_code_list = self.load_data()
+if (len(global_buy_stock_code_list) > 0):
+    local_buy_stock_code_list = global_buy_stock_code_list
+print('조건검색 코드 :', local_buy_stock_code_list)
+#for stock in local_buy_stock_code_list:
+pymon1 = PyTrader('126880')
+pymon1.start()
+pymon2 = PyTrader('006890')
+pymon2.start()
+
