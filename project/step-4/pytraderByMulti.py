@@ -18,12 +18,11 @@ maesu_end_time  = 150000
 maemae_logic = 'M'  # 'S':시가갭매매 'R':램덤매매, 'M':다중매매
 order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader(threading.Thread):
-    def __init__(self, code):
+    def __init__(self):
         threading.Thread.__init__(self)
         self.kiwoom = Kiwoom()
         self.kiwoom.comm_connect()
         self.order_type = 1      #1:매수,2:매도
-        self.code = code
 
     def get_account(self):
         account_list = self.kiwoom.get_login_info("ACCNO")
@@ -259,8 +258,20 @@ if (len(global_buy_stock_code_list) > 0):
     local_buy_stock_code_list = global_buy_stock_code_list
 print('조건검색 코드 :', local_buy_stock_code_list)
 #for stock in local_buy_stock_code_list:
-pymon1 = PyTrader('126880')
-pymon1.start()
-pymon2 = PyTrader('006890')
-pymon2.start()
+pytrade = PyTrader()
+list_threads = []
+for stock in local_buy_stock_code_list:
+    # t = threading.Thread(target=BankAccount.execute_deposit, args=(my_account, 5000,'Customer %d' % (num_thread,)))
+    # This syntax will do the same job as the line just above
+    t = threading.Thread(target=pytrade.S_mae_mae_multi, args=(stock,))
+    print("thread name ==> ", t.getName())
+    list_threads.append(t)
+    t.start()
+
+print("All threads are started")
+for t in list_threads:
+    t.join()  # Wait until thread terminates its job
+# [t.join() for t in list_threads]
+print("All threads completed")
+
 

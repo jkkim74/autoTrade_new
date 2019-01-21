@@ -13,8 +13,8 @@ class BankAccount():
         self.owner = owner
         # We will keep each write access to money in an history file
         # In order to understand what Python does with our money'
-        # self.history_file = open('/tmp/%s' % (owner,), 'w')
-        self.history_file = open("tmp/test.txt",'w')
+        self.history_file = open('tmp/%s' % (owner,), 'w')
+        # self.history_file = open("tmp/test.txt",'w')
         self.money_lock = threading.Lock()
 
     def execute_deposit(self, amount, by='A customer'):
@@ -39,10 +39,11 @@ my_account.execute_deposit(100, "First customer")
 my_account.execute_deposit(200, "Second customer")
 
 list_threads = []
-for num_thread in range(1, 11):
+for num_thread in range(1, 5):
     # t = threading.Thread(target=BankAccount.execute_deposit, args=(my_account, 5000,'Customer %d' % (num_thread,)))
     # This syntax will do the same job as the line just above
-    t = threading.Thread(target=my_account.execute_deposit, args=(5000, 'Customer %d' % (num_thread,)))
+    t = threading.Thread(target=my_account.execute_deposit, args=(2, 'Customer %d' % (num_thread,)))
+    print("thread name ==> ", t.getName())
     # list_threads.append(t)
     t.start()
 
