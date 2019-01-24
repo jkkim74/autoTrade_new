@@ -23,7 +23,7 @@ import pandas as pd
 
 import util
 
-TEST_MODE = False
+TEST_MODE = True
 s_year_date = '2019-01-01';
 if TEST_MODE:
     total_buy_money = 10000
@@ -31,6 +31,8 @@ else:
     total_buy_money = 20000000
 maesu_start_time = 90000
 maesu_end_time = 150000
+global_buy_stock_code_list = ['225430', '049830']
+ACCOUNT_NO = '8111294711'
 # 상수
 종목별매수상한 = 1000000  # 종목별매수상한 백만원
 매수수수료비율 = 0.00015  # 매도시 평단가에 곱해서 사용
@@ -909,8 +911,6 @@ def load_data():
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     hts = Kiwoom()
-    global_buy_stock_code_list = []#['225430', '049830']
-    ACCOUNT_NO = '8111294711'
     result = -1
     order_type = 1
     # login
