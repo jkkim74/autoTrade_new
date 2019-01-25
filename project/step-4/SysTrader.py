@@ -23,15 +23,15 @@ import pandas as pd
 
 import util
 
-TEST_MODE = True
+TEST_MODE = False
 s_year_date = '2019-01-01';
 if TEST_MODE:
-    total_buy_money = 10000
+    total_buy_money = 20000
 else:
     total_buy_money = 20000000
 maesu_start_time = 90000
 maesu_end_time = 150000
-global_buy_stock_code_list = ['225430', '049830']
+global_buy_stock_code_list = []
 ACCOUNT_NO = '8111294711'
 # 상수
 종목별매수상한 = 1000000  # 종목별매수상한 백만원
@@ -143,6 +143,8 @@ class Kiwoom(QAxWidget):
         self.params = {}
         self.dict_stock = {}
         self.dict_callback = {}
+        self.set_stock_ordered = []
+        self.dict_holding = {}
 
         # 요청 결과
         self.event = None
@@ -793,7 +795,6 @@ class Kiwoom(QAxWidget):
                 self.dict_holding.pop(종목코드, None)
 
             logger.debug("체결: %s" % (dict_contract,))
-
         if sGubun == '1':
             list_item_name = ["계좌번호", "종목코드", "신용구분", "대출일", "종목명",
                               "현재가", "보유수량", "매입단가", "총매입가", "주문가능수량",
@@ -825,6 +826,8 @@ class Kiwoom(QAxWidget):
             self.dict_holding[종목코드] = dict_holding
 
             logger.debug("잔고: %s" % (dict_holding,))
+            if self.dict_holding[종목코드]["보유수량"] > 0 and self.dict_holding[종목코드]["주문가능수량"] > 0:
+                self._stock_mado_proc(ACCOUNT_NO, 종목코드)
 
     def kiwoom_GetChejanData(self, nFid):
         """
@@ -835,6 +838,38 @@ class Kiwoom(QAxWidget):
         """
         res = self.dynamicCall("GetChejanData(int)", [nFid])
         return res
+
+    def _stock_mado_proc(self, account, code):
+        print('매도 :', account, code)
+        maeip_danga = self.dict_holding[code]["매입단가"]
+        jumun_ganeung_suryang = self.dict_holding[code]["주문가능수량"]
+        maedo_price = self._get_maedo_price(maeip_danga)
+        print(maeip_danga, jumun_ganeung_suryang, maedo_price)
+        result = self.kiwoom_SendOrder("send_order", "0101", account, 2, code, jumun_ganeung_suryang, maedo_price, '00', "")#2:매도
+        if (result == 0):
+            print("매도처리를 하였습니다.")
+        else:
+            print("매도처리 실패하였습니다.")
+
+    def _get_maedo_price(self, price):
+        s_price = int(price * 1.02)
+        if (1000 <= s_price < 5000):
+            r_price = round(s_price, -1) + 5
+        elif (5000 <= s_price < 10000):
+            dif = s_price % 5
+            r_price = s_price - dif
+        elif (10000 <= s_price < 50000):
+            r_price = round(s_price, -2)
+        elif (50000 <= s_price < 100000):
+            r_price = round(s_price, -2)
+        elif (100000 <= s_price < 500000):
+            dif = s_price % 500
+            r_price = s_price - dif
+        elif (s_price >= 500000):
+            r_price = round(s_price, -3)
+        else:
+            r_price = s_price
+        return r_price
 
 
 def _isBuyStockAvailable(buy_stock_code, cur_price, start_price):
@@ -926,7 +961,6 @@ if __name__ == '__main__':
             while True:
                 if _isTimeAvalable():
                     for code in local_buy_stock_code_list:
-                        nQty = 1
                         hts.kiwoom_TR_OPT10001_주식기본정보요청(code)
                         cur_price = hts.dict_stock[code].get('현재가')
                         start_price = hts.dict_stock[code].get('시가')
@@ -939,7 +973,7 @@ if __name__ == '__main__':
                             print(code, result)
                             if result == 0:
                                 print("매수 요청 하였습니다.")
-                                global_buy_stock_code_list.remove(code)
+                                local_buy_stock_code_list.remove(code)
                             else:
                                 print("매수 요청 실패하였습니다.")
                         else:
