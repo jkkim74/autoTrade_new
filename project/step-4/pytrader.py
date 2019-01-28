@@ -21,7 +21,8 @@ class PyTrader(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.kiwoom = Kiwoom()
-        self.kiwoom.comm_connect()
+        if self.kiwoom.get_connect_state() == 0:
+            self.kiwoom.comm_connect()
         self.order_type = 1      #1:매수,2:매도
 
     def get_account(self):
@@ -79,7 +80,7 @@ class PyTrader(threading.Thread):
             if prev_bus_day == None:
                 prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 2))
         # 조건검색을 통해 저장한 데이타 가져오기
-        local_buy_stock_code_list = self.load_data()
+        local_buy_stock_code_list = [sys.argv[1]]#self.load_data()
         if(len(global_buy_stock_code_list) > 0):
             local_buy_stock_code_list = global_buy_stock_code_list
         print('조건검색 코드 :',local_buy_stock_code_list)
@@ -145,7 +146,7 @@ class PyTrader(threading.Thread):
                     else:
                         print("매수 실패하였습니다.")
                         break
-            time.sleep(1.5)
+            time.sleep(4)
         ############################### 주식 주문 종료 #########################################
         ############################### 확정 매도 주문 #########################################
         if (result == 0 or result == 1):  # 매수주문 성공시에 확정매도 처리

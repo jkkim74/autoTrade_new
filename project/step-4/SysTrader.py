@@ -23,15 +23,15 @@ import pandas as pd
 
 import util
 
-TEST_MODE = False
+TEST_MODE = True
 s_year_date = '2019-01-01';
 if TEST_MODE:
-    total_buy_money = 20000
+    total_buy_money = 30000000
 else:
-    total_buy_money = 20000000
+    total_buy_money = 30000000
 maesu_start_time = 90000
 maesu_end_time = 150000
-global_buy_stock_code_list = []
+global_buy_stock_code_list = ['225430','005690','049830']
 ACCOUNT_NO = '8111294711'
 # 상수
 종목별매수상한 = 1000000  # 종목별매수상한 백만원
@@ -965,7 +965,11 @@ if __name__ == '__main__':
                         cur_price = hts.dict_stock[code].get('현재가')
                         start_price = hts.dict_stock[code].get('시가')
                         if _isBuyStockAvailable(code, cur_price, start_price):
-                            high_price = int(hts.dict_stock[code].get('상한가'))
+                            high_price = 3000#int(hts.dict_stock[code].get('상한가'))
+                            if code == "049830":
+                                high_price = 10000
+                            elif code == "005690":
+                                high_price = 15000
                             nQty = int(total_buy_money / high_price)
                             print("매수수량 : ", nQty, " 매수상한가 : ", high_price)
                             result = hts.kiwoom_SendOrder("send_order", "0101", ACCOUNT_NO, order_type, code, nQty,
@@ -978,7 +982,7 @@ if __name__ == '__main__':
                                 print("매수 요청 실패하였습니다.")
                         else:
                             print("매수 불가합니다.")
-                time.sleep(2)
+                time.sleep(3)
             else:
                 print("매수 가능한 종목이 없습니다.")
 

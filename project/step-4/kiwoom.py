@@ -48,6 +48,10 @@ class Kiwoom(QAxWidget):
 
         self.login_loop.exit()
 
+    def get_connect_state(self):
+        lRet = self.dynamicCall("GetConnectState()")
+        return lRet
+
     def get_code_list_by_market(self, market):
         ret = self.dynamicCall("GetCodeListByMarket(QString)", market)
         code_list = ret.split(';')
@@ -63,6 +67,10 @@ class Kiwoom(QAxWidget):
 
     def get_master_construction(self, code):
         ret = self.dynamicCall("GetMasterConstruction(QString)", code)
+        return ret
+
+    def get_master_stock_state(self, code):
+        ret = self.dynamicCall("GetMasterStockState(QString)", code)
         return ret
 
     def set_input_value(self, id, value):

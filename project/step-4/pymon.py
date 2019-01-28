@@ -26,7 +26,8 @@ class PyMon:
         for code in code_list:
             code_info = self.kiwoom.get_master_code_name(code)
             mste_info = self.kiwoom.get_master_construction(code)
-            print(code_info, mste_info)
+            stock_state = self.kiwoom.get_master_stock_state(code)
+            print(code_info, mste_info, stock_state)
         if len(code_list) == 0:
             print("해당하는 조건검색의 결과 주식이 없습니다.")
             pass
