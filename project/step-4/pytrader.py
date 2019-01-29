@@ -8,13 +8,17 @@ import pickle
 import util, jk_util
 import threading
 
+TEST_MODE = True
 s_year_date = '2019-01-01';
 #s_standard_date = '2019-01-04'
 #e_standard_date = '2019-01-07'
 global_buy_stock_code_list = []
-total_buy_money = 30000000
-maesu_start_time = 90000
-maesu_end_time  = 150000
+if TEST_MODE:
+    total_buy_money = 20000
+else:
+    total_buy_money = 30000000
+maesu_start_time = 90100
+maesu_end_time  = 153000
 maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
 order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader(threading.Thread):
@@ -80,7 +84,10 @@ class PyTrader(threading.Thread):
             if prev_bus_day == None:
                 prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 2))
         # 조건검색을 통해 저장한 데이타 가져오기
-        local_buy_stock_code_list = [sys.argv[1]]#self.load_data()
+        if len(sys.argv) > 1:
+            local_buy_stock_code_list = [sys.argv[1]]#self.load_data()
+        else:
+            local_buy_stock_code_list = self.load_data()
         if(len(global_buy_stock_code_list) > 0):
             local_buy_stock_code_list = global_buy_stock_code_list
         print('조건검색 코드 :',local_buy_stock_code_list)
@@ -122,12 +129,13 @@ class PyTrader(threading.Thread):
         # ############### 주식주문 스타트 #################
         while True:
             now_time = int(datetime.now().strftime('%H%M%S'))
-            cur_price = self.get_cur_price(buy_stock_code)
-            if (cur_price[0] == '-' or cur_price[0] == '+'):
-                cur_price = cur_price[1:]
-            self.d_cur_price = int(cur_price)
-            print('현재시간 : ', now_time, '현재가 : ', self.d_cur_price)
+            print('매매시간 : ',maesu_start_time,'~',maesu_end_time,' 현재시간 : ',now_time)
             if (maesu_end_time >= now_time >= maesu_start_time):
+                cur_price = self.get_cur_price(buy_stock_code)
+                if (cur_price[0] == '-' or cur_price[0] == '+'):
+                    cur_price = cur_price[1:]
+                self.d_cur_price = int(cur_price)
+                print('현재시간 : ', now_time, '현재가 : ', self.d_cur_price)
                 if ((self.e_buy_price >= self.d_cur_price >= self.s_buy_price) and (result == -1)):
                     high_price = int(self.get_high(buy_stock_code))
                     nQty = int(total_buy_money / high_price)

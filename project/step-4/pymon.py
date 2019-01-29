@@ -1,4 +1,5 @@
 import sys
+import json
 from PyQt5.QtWidgets import *
 from kiwoom import *
 import time
@@ -43,7 +44,10 @@ class PyMon:
         #         result.append((code, per, pbr))
         #
         # data = sorted(result, key=lambda x:x[2])
-        self.dump_data(code_list)
+        # self.dump_data(code_list)
+        # TEST
+        # code_list = ['066590','006920','005690']
+        self.dump_data_json(code_list)
 
     def run_condition_data(self):
         self.kiwoom.get_condition_load()
@@ -117,6 +121,10 @@ class PyMon:
         f = open("./database.db", "wb")
         pickle.dump(data, f)
         f.close()
+    def dump_data_json(self,data):
+        with open('buy_stock.json','w',encoding='utf-8') as stock_file:
+            json.dump(data, stock_file, ensure_ascii=False, indent="\t")
+
 
 app = QApplication(sys.argv)
 pymon = PyMon()
