@@ -14,12 +14,12 @@ s_year_date = '2019-01-01';
 #e_standard_date = '2019-01-07'
 global_buy_stock_code_list = []
 if TEST_MODE:
-    total_buy_money = 20000
+    total_buy_money = 10000
 else:
-    total_buy_money = 30000000
+    total_buy_money = 1000#30000000
 maesu_start_time = 90100
 maesu_end_time  = 153000
-maemae_logic = 'S'  # 'S':시가갭매매 'R':램덤매매
+maemae_logic = 'R'  # 'S':시가갭매매 'R':램덤매매
 order_method = "00" # "00":보통매매, "03":시장가매매
 class PyTrader(threading.Thread):
     def __init__(self):
@@ -31,6 +31,7 @@ class PyTrader(threading.Thread):
 
     def get_account(self):
         account_list = self.kiwoom.get_login_info("ACCNO")
+        print(account_list)
         return account_list.split(';')[0]
 
     def get_start_price(self, code, s_date):
@@ -61,11 +62,12 @@ class PyTrader(threading.Thread):
     def R_mae_mae(self):
         account = self.get_account()
         nQty = 1
-        stock_price = '17100'
+        stock_price = '6720'
         # 조건검색을 통해 저장한 데이타 가져오기
         local_buy_stock_code_list = self.load_data()
         buy_stock_code = local_buy_stock_code_list[0]
-        self.kiwoom.send_order("send_order", "0101", account, 2, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
+        # buy_stock_code = global_buy_stock_code_list[0]
+        self.kiwoom.send_order("send_order", "0101", account, 1, buy_stock_code, nQty, stock_price, "00", "") #매수:1, 매도:2
         result = self.kiwoom.order_result
         if (result == 0):
             print("매도주문을 하였습니다.")
@@ -74,6 +76,7 @@ class PyTrader(threading.Thread):
 
     def S_mae_mae(self):
         account = self.get_account()
+        print("계좌정보 : ",account)
         # 금일날짜
         today   = datetime.today().strftime("%Y%m%d")
         today_f = datetime.today().strftime("%Y%m%d")
@@ -84,12 +87,14 @@ class PyTrader(threading.Thread):
             if prev_bus_day == None:
                 prev_bus_day = util.get_prev_date(1, 2, str(int(today) - 2))
         # 조건검색을 통해 저장한 데이타 가져오기
-        if len(sys.argv) > 1:
-            local_buy_stock_code_list = [sys.argv[1]]#self.load_data()
-        else:
-            local_buy_stock_code_list = self.load_data()
         if(len(global_buy_stock_code_list) > 0):
             local_buy_stock_code_list = global_buy_stock_code_list
+        else:
+            if len(sys.argv) > 1:
+                local_buy_stock_code_list = [sys.argv[1]]#self.load_data()
+            else:
+                local_buy_stock_code_list = self.load_data()
+
         print('조건검색 코드 :',local_buy_stock_code_list)
         # codes = [x[0] for x in data]
         # print(data)
@@ -138,7 +143,7 @@ class PyTrader(threading.Thread):
                 print('현재시간 : ', now_time, '현재가 : ', self.d_cur_price)
                 if ((self.e_buy_price >= self.d_cur_price >= self.s_buy_price) and (result == -1)):
                     high_price = int(self.get_high(buy_stock_code))
-                    nQty = int(total_buy_money / high_price)
+                    nQty = int(total_buy_money / self.d_cur_price)
                     print(high_price, nQty)
                     # TEST
                     # high_price = 5690
@@ -190,11 +195,8 @@ class PyTrader(threading.Thread):
         maedo_price = self._get_maedo_price(maeip_danga)
         print(maeip_danga, jumun_ganeung_suryang, maedo_price)
         self.kiwoom.send_order("send_order", "0101", account, 2, code, jumun_ganeung_suryang, maedo_price, '00', "")#2:매도
-        result = self.kiwoom.order_result
-        if (result == 0):
-            print("매도처리를 하였습니다.")
-        else:
-            print("매도처리 실패하였습니다.")
+        print("매도요청을 하였습니다.")
+
 
     def _get_maedo_price(self, price):
         s_price = int(price * 1.02)

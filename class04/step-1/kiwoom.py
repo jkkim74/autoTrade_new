@@ -9,15 +9,15 @@ class Kiwoom(QAxWidget):
         self._set_signal_slot()
 
     def _create_kiwoom_instance(self):
-        self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
+        self.kiwoomObj = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")#self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
 
     def _set_signal_slot(self):
-        self.OnEventConnect.connect(self._event_connect)
-        self.OnReceiveTrData.connect(self._receive_tr_data)
-        self.OnReceiveChejanData.connect(self._receive_chejan_data)
+        self.kiwoomObj.OnEventConnect.connect(self._event_connect)
+        self.kiwoomObj.OnReceiveTrData.connect(self._receive_tr_data)
+        self.kiwoomObj.OnReceiveChejanData.connect(self._receive_chejan_data)
 
     def comm_connect(self):
-        self.dynamicCall("CommConnect()")
+        self.kiwoomObj.dynamicCall("CommConnect()")
         self.login_loop = QEventLoop()
         self.login_loop.exec_()
 
@@ -26,8 +26,12 @@ class Kiwoom(QAxWidget):
             print("로그인 성공")
         else:
             print("로그인 실패")
-
         self.login_loop.exit()
+        # return err
+
+    def get_connect_state(self):
+        lRet = self.dynamicCall("GetConnectState()")
+        return lRet
 
     def get_code_list_by_market(self, market):
         ret = self.dynamicCall("GetCodeListByMarket(QString)", market)

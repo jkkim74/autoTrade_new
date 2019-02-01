@@ -226,18 +226,18 @@ class Kiwoom(QAxWidget):
 
             pass
 
-        if(len(self.michegyeolInfo) == 0):
-            try:
-                self.order_loop.exit()
-            except:
-                pass
-        else:
-            print('미체결수량 : ', self.michegyeolInfo[self.jongmok_code]['미체결수량'])
-            if(self.michegyeolInfo[self.jongmok_code]['미체결수량'] == 0):
-                try:
-                    self.order_loop.exit()
-                except:
-                    pass
+        # if(len(self.michegyeolInfo) == 0):
+        #     try:
+        #         self.order_loop.exit()
+        #     except:
+        #         pass
+        # else:
+        #     print('미체결수량 : ', self.michegyeolInfo[self.jongmok_code]['미체결수량'])
+        #     if(self.michegyeolInfo[self.jongmok_code]['미체결수량'] == 0):
+        #         try:
+        #             self.order_loop.exit()
+        #         except:
+        #             pass
 
     def _get_repeat_cnt(self, trcode, rqname):
         ret = self.dynamicCall("GetRepeatCnt(QString, QString)", trcode, rqname)

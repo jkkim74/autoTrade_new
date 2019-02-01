@@ -44,7 +44,7 @@ class PyMon:
         #         result.append((code, per, pbr))
         #
         # data = sorted(result, key=lambda x:x[2])
-        # self.dump_data(code_list)
+        self.dump_data(code_list)
         # TEST
         # code_list = ['066590','006920','005690']
         self.dump_data_json(code_list)

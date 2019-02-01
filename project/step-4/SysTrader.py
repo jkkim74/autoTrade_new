@@ -26,7 +26,7 @@ import util
 TEST_MODE = True
 s_year_date = '2019-01-01';
 if TEST_MODE:
-    total_buy_money = 30000000
+    total_buy_money = 100000
 else:
     total_buy_money = 30000000
 maesu_start_time = 90000
@@ -61,9 +61,10 @@ class RequestThreadWorker(QObject):
         # 간혹 요청에 대한 결과가 콜백으로 오지 않음
         # 마지막 요청을 저장해 뒀다가 일정 시간이 지나도 결과가 안오면 재요청
         self.retry_timer = None
+        self.currentTime = datetime.now().__format__()
 
     def retry(self, request):
-        logger.debug("키움 함수 재시도: %s %s %s" % (request[0].__name__, request[1], request[2]))
+        logger.debug(util.cur_date_time() + " : 키움 함수 재시도: %s %s %s" % (request[0].__name__, request[1], request[2]))
         self.request_queue.appendleft(request)
 
     def run(self):
@@ -77,7 +78,7 @@ class RequestThreadWorker(QObject):
                 continue
 
             # 요청 실행
-            logger.debug("키움 함수 실행: %s %s %s" % (request[0].__name__, request[1], request[2]))
+            logger.debug(util.cur_date_time() + " : 키움 함수 실행: %s %s %s" % (request[0].__name__, request[1], request[2]))
             request[0](hts, *request[1], **request[2])
 
             # 요청에대한 결과 대기
@@ -101,7 +102,7 @@ class SyncRequestDecorator:
                 self.params = {}
                 self.result = {}
             # self.request_thread_worker.request_queue.append((func, args, kwargs))
-            logger.debug("요청 실행: %s %s %s" % (func.__name__, args, kwargs))
+            logger.debug(util.cur_date_time() + " : 요청 실행: %s %s %s" % (func.__name__, args, kwargs))
             func(self, *args, **kwargs)
             self.event = QEventLoop()
             self.event.exec_()
@@ -112,7 +113,7 @@ class SyncRequestDecorator:
     @staticmethod
     def kiwoom_sync_callback(func):
         def func_wrapper(self, *args, **kwargs):
-            logger.debug("요청 콜백: %s %s %s" % (func.__name__, args, kwargs))
+            logger.debug(util.cur_date_time() + " : 요청 콜백: %s %s %s" % (func.__name__, args, kwargs))
             func(self, *args, **kwargs)  # 콜백 함수 호출
 
         return func_wrapper
@@ -184,13 +185,13 @@ class Kiwoom(QAxWidget):
         :return:
         """
         if nErrCode == 0:
-            logger.debug("로그인 성공")
+            logger.debug(util.cur_date_time() + " : 로그인 성공")
         elif nErrCode == 100:
-            logger.debug("사용자 정보교환 실패")
+            logger.debug(util.cur_date_time() + " : 사용자 정보교환 실패")
         elif nErrCode == 101:
-            logger.debug("서버접속 실패")
+            logger.debug(util.cur_date_time() + " : 서버접속 실패")
         elif nErrCode == 102:
-            logger.debug("버전처리 실패")
+            logger.debug(util.cur_date_time() + " : 버전처리 실패")
 
         self.result['result'] = nErrCode
         if self.event is not None:
@@ -350,7 +351,7 @@ class Kiwoom(QAxWidget):
 
         if sRQName == "예수금상세현황요청":
             self.int_주문가능금액 = int(self.kiwoom_GetCommData(sTRCode, sRQName, 0, "주문가능금액"))
-            logger.debug("예수금상세현황요청: %s" % (self.int_주문가능금액,))
+            logger.debug(util.cur_date_time() + " : 예수금상세현황요청: %s" % (self.int_주문가능금액,))
             if "예수금상세현황요청" in self.dict_callback:
                 self.dict_callback["예수금상세현황요청"](self.int_주문가능금액)
 
@@ -365,7 +366,7 @@ class Kiwoom(QAxWidget):
                 item_value = item_value.strip()
                 dict_stock[item_name] = item_value
             self.dict_stock[종목코드] = dict_stock
-            logger.debug("주식기본정보: %s, %s" % (종목코드, dict_stock))
+            logger.debug(util.cur_date_time() + " : 주식기본정보: %s, %s" % (종목코드, dict_stock))
             if "주식기본정보" in self.dict_callback:
                 self.dict_callback["주식기본정보"](dict_stock)
 
@@ -437,7 +438,7 @@ class Kiwoom(QAxWidget):
                 self.result['done'] = False
             else:
                 # 연속조회 완료
-                logger.debug("차트 연속조회완료")
+                logger.debug(util.cur_date_time() + " : 차트 연속조회완료")
                 self.result['nPrevNext'] = 0
                 self.result['done'] = True
 
@@ -489,7 +490,7 @@ class Kiwoom(QAxWidget):
                 self.result['done'] = False
             else:
                 # 연속조회 완료
-                logger.debug("차트 연속조회완료")
+                logger.debug(util.cur_date_time() + " : 차트 연속조회완료")
                 self.result['nPrevNext'] = 0
                 self.result['done'] = True
 
@@ -506,7 +507,7 @@ class Kiwoom(QAxWidget):
                 dict_holding["수익"] = (dict_holding["현재가"] - dict_holding["총매입가"]) * dict_holding["보유수량"]
                 종목코드 = dict_holding["종목코드"]
                 self.dict_holding[종목코드] = dict_holding
-                logger.debug("계좌수익: %s" % (dict_holding,))
+                logger.debug(util.cur_date_time() + " : 계좌수익: %s" % (dict_holding,))
             if '계좌수익률요청' in self.dict_callback:
                 self.dict_callback['계좌수익률요청'](self.dict_holding)
 
@@ -530,7 +531,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
-        logger.debug("REAL: %s %s %s" % (sCode, sRealType, sRealData))
+        logger.debug(util.cur_date_time() + " : REAL: %s %s %s" % (sCode, sRealType, sRealData))
 
         if sRealType == "주식체결":
             pass
@@ -624,7 +625,7 @@ class Kiwoom(QAxWidget):
         :return:
         """
         list_str_code = list(filter(None, strCodeList.split(';')))
-        logger.debug("조건검색 결과: %s" % (list_str_code,))
+        logger.debug(util.cur_date_time() + " : 조건검색 결과: %s" % (list_str_code,))
 
         # 조검검색 결과를 종목 모니터링 리스트에 추가
         self.set_stock2monitor.update(set(list_str_code))
@@ -645,7 +646,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
-        logger.debug("실시간 조건검색: %s %s %s %s" % (strCode, strType, strConditionName, strConditionIndex))
+        logger.debug(util.cur_date_time() + " : 실시간 조건검색: %s %s %s %s" % (strCode, strType, strConditionName, strConditionIndex))
         if strType == "I":
             # 모니터링 종목 리스트에 추가
             self.set_stock2monitor.add(strCode)
@@ -686,7 +687,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
-        logger.debug("주문: %s %s %s %s %s %s %s %s %s" % (
+        logger.debug(util.cur_date_time() + " : 주문: %s %s %s %s %s %s %s %s %s" % (
             sRQName, sScreenNo, sAccNo, nOrderType, sCode, nQty, nPrice, sHogaGb, sOrgOrderNo))
         lRet = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                                 [sRQName, sScreenNo, sAccNo, nOrderType, sCode, nQty, nPrice, sHogaGb,
@@ -702,7 +703,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
-        logger.debug("주문/잔고: %s %s %s %s" % (sScrNo, sRQName, sTrCode, sMsg))
+        logger.debug(util.cur_date_time() + " : 주문/잔고: %s %s %s %s" % (sScrNo, sRQName, sTrCode, sMsg))
 
     def kiwoom_OnReceiveChejanData(self, sGubun, nItemCnt, sFIdList, **kwargs):
         """주문접수, 체결, 잔고발생시
@@ -758,7 +759,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
-        logger.debug("체결/잔고: %s %s %s" % (sGubun, nItemCnt, sFIdList))
+        logger.debug(util.cur_date_time() + " : 체결/잔고: %s %s %s" % (sGubun, nItemCnt, sFIdList))
         if sGubun == '0':
             list_item_name = ["계좌번호", "주문번호", "관리자사번", "종목코드", "주문업무분류",
                               "주문상태", "종목명", "주문수량", "주문가격", "미체결수량",
@@ -794,7 +795,7 @@ class Kiwoom(QAxWidget):
             else:
                 self.dict_holding.pop(종목코드, None)
 
-            logger.debug("체결: %s" % (dict_contract,))
+            logger.debug(util.cur_date_time() + " : 체결: %s" % (dict_contract,))
         if sGubun == '1':
             list_item_name = ["계좌번호", "종목코드", "신용구분", "대출일", "종목명",
                               "현재가", "보유수량", "매입단가", "총매입가", "주문가능수량",
@@ -825,7 +826,7 @@ class Kiwoom(QAxWidget):
             # 보유종목 리스트에 추가
             self.dict_holding[종목코드] = dict_holding
 
-            logger.debug("잔고: %s" % (dict_holding,))
+            logger.debug(util.cur_date_time() + " : 잔고: %s" % (dict_holding,))
             if self.dict_holding[종목코드]["보유수량"] > 0 and self.dict_holding[종목코드]["주문가능수량"] > 0:
                 self._stock_mado_proc(ACCOUNT_NO, 종목코드)
 
@@ -910,9 +911,14 @@ def _isBuyStockAvailable(buy_stock_code, cur_price, start_price):
         s_buy_price = int(s_buy_close_price_t)
         e_buy_price = int(e_buy_price)
 
+    if start_price[0] == '-' or start_price[0] == '+':
+        start_price = start_price[1:]
+
     if s_buy_price > int(start_price):
         print("금일 시가가 매수시작가보다 낮아 매수 불가합니다.")
         return False
+    if cur_price[0] == '-' or cur_price[0] == '+':
+        cur_price = cur_price[1:]
     if (e_buy_price >= int(cur_price) >= s_buy_price):
         bBuyStock = True
     else:
@@ -965,12 +971,10 @@ if __name__ == '__main__':
                         cur_price = hts.dict_stock[code].get('현재가')
                         start_price = hts.dict_stock[code].get('시가')
                         if _isBuyStockAvailable(code, cur_price, start_price):
-                            high_price = 3000#int(hts.dict_stock[code].get('상한가'))
-                            if code == "049830":
-                                high_price = 10000
-                            elif code == "005690":
-                                high_price = 15000
-                            nQty = int(total_buy_money / high_price)
+                            high_price = int(hts.dict_stock[code].get('상한가'))
+                            if cur_price[0] == '-' or cur_price[0] == '+':
+                                buy_price = int(cur_price[1:])
+                            nQty = int(total_buy_money / buy_price)
                             print("매수수량 : ", nQty, " 매수상한가 : ", high_price)
                             result = hts.kiwoom_SendOrder("send_order", "0101", ACCOUNT_NO, order_type, code, nQty,
                                                           high_price, "00", "")
@@ -982,6 +986,7 @@ if __name__ == '__main__':
                                 print("매수 요청 실패하였습니다.")
                         else:
                             print("매수 불가합니다.")
+                        hts.dict_stock[code] = {}
                 time.sleep(3)
             else:
                 print("매수 가능한 종목이 없습니다.")
