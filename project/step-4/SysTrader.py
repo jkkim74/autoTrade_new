@@ -23,21 +23,22 @@ import pandas as pd
 
 import util
 
-TEST_MODE = True
+TEST_MODE = False
 s_year_date = '2019-01-01';
 if TEST_MODE:
-    total_buy_money = 100000
+    total_buy_money = 50000
 else:
     total_buy_money = 30000000
 maesu_start_time = 90000
 maesu_end_time = 150000
-global_buy_stock_code_list = ['225430','005690','049830']
+global_buy_stock_code_list = []
 ACCOUNT_NO = '8111294711'
 # 상수
 종목별매수상한 = 1000000  # 종목별매수상한 백만원
 매수수수료비율 = 0.00015  # 매도시 평단가에 곱해서 사용
 매도수수료비율 = 0.00015 + 0.003  # 매도시 현재가에 곱해서 사용
 화면번호 = "1234"
+ACCNT_INDEX = 4
 
 # 로그 파일 핸들러
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -175,6 +176,15 @@ class Kiwoom(QAxWidget):
         """
         lRet = self.dynamicCall("GetConnectState()")
         return lRet
+    # ------------------------------------
+    # 로그인 정보
+    # ------------------------------------
+    def _kiwoom_GetLoginInfo(self, tag):
+        return self.dynamicCall("GetLoginInfo(QString)", tag)
+
+    def kiwoom_GetAccountNo(self):
+        accountList = self._kiwoom_GetLoginInfo("ACCNO").split(";")
+        return accountList[ACCNT_INDEX]
 
     @SyncRequestDecorator.kiwoom_sync_callback
     def kiwoom_OnEventConnect(self, nErrCode, **kwargs):
@@ -923,14 +933,14 @@ def _isBuyStockAvailable(buy_stock_code, cur_price, start_price):
         bBuyStock = True
     else:
         bBuyStock = False
-    print('### 시가 : ', s_buy_price, ' 종가 : ', e_buy_price, ' 현재가 : ', int(cur_price), ' 시가 : ', start_price, "매수가능여부 :",
+    print('### 매수범위 : ', s_buy_price, ' ~ ', e_buy_price, ' 현재가 : ', int(cur_price), ' 시가 : ', start_price, "매수가능여부 :",
           bBuyStock)  # 매수전날 시가
     return bBuyStock
 
 
 def _isTimeAvalable():
-    if TEST_MODE:
-        return True
+    #if TEST_MODE:
+    return True
     now_time = int(datetime.now().strftime('%H%M%S'))
     if (maesu_end_time >= now_time >= maesu_start_time):
         return True
@@ -959,6 +969,8 @@ if __name__ == '__main__':
         logger.debug('로그인 시도')
         res = hts.kiwoom_CommConnect()
         logger.debug('로그인 결과: {}'.format(res))
+        accountNo = hts.kiwoom_GetAccountNo()# hts.kiwoom_GetLoginInfo()[4]
+        print("계좌정보 :", accountNo)
         if len(global_buy_stock_code_list) > 0:
             local_buy_stock_code_list = global_buy_stock_code_list
         else:
@@ -976,7 +988,7 @@ if __name__ == '__main__':
                                 buy_price = int(cur_price[1:])
                             nQty = int(total_buy_money / buy_price)
                             print("매수수량 : ", nQty, " 매수상한가 : ", high_price)
-                            result = hts.kiwoom_SendOrder("send_order", "0101", ACCOUNT_NO, order_type, code, nQty,
+                            result = hts.kiwoom_SendOrder("send_order", "0101", accountNo, order_type, code, nQty,
                                                           high_price, "00", "")
                             print(code, result)
                             if result == 0:
