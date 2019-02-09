@@ -228,6 +228,9 @@ class PyTrader(threading.Thread):
         except:
             pass
 
+    def processStopLoss(self,code):
+        pass
+
 app = QApplication(sys.argv)
 pymon = PyTrader()
 pymon.run()
