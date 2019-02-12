@@ -14,7 +14,7 @@ from PyQt5.QAxContainer import QAxWidget
 from PyQt5.QtCore import QObject
 from PyQt5.QtCore import QThread
 from PyQt5.QtCore import QEventLoop
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import *
 import FinanceDataReader as fdr
 from datetime import datetime
 import pickle
@@ -28,17 +28,20 @@ s_year_date = '2019-01-01';
 if TEST_MODE:
     total_buy_money = 50000
 else:
-    total_buy_money = 30000000
+    total_buy_money = 10000000
 maesu_start_time = 90000
-maesu_end_time = 150000
-global_buy_stock_code_list = []
+maesu_end_time = 180000
+global_buy_stock_code_list = ['016380', '021040']
 ACCOUNT_NO = '8111294711'
 # 상수
 종목별매수상한 = 1000000  # 종목별매수상한 백만원
 매수수수료비율 = 0.00015  # 매도시 평단가에 곱해서 사용
 매도수수료비율 = 0.00015 + 0.003  # 매도시 현재가에 곱해서 사용
 화면번호 = "1234"
-ACCNT_INDEX = 4
+if TEST_MODE:
+    ACCNT_INDEX = 4
+else:
+    ACCNT_INDEX = 0
 
 # 로그 파일 핸들러
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -120,7 +123,7 @@ class SyncRequestDecorator:
         return func_wrapper
 
 
-class Kiwoom(QAxWidget):
+class Kiwoom(QAxWidget, QMainWindow):
     # 초당 5회 제한이므로 최소한 0.2초 대기해야 함
     # (2018년 10월 기준) 1시간에 1000회 제한하므로 3.6초 이상 대기해야 함
     연속요청대기초 = 4.0
@@ -152,8 +155,25 @@ class Kiwoom(QAxWidget):
         self.event = None
         self.result = {}
 
+        # window 창뛰우기
+        self.setWindowTitle("PyStock")
+        self.setGeometry(300, 300, 300, 150)
+
+        btn = QPushButton("Check state", self)
+        btn.move(20, 70)
+        btn.clicked.connect(self.btn_clicked)
+
+        # 미체결정보
+        self.michegyeolInfo = {}
+
     def run(self):
         print("== run ==")
+
+    def btn_clicked(self):
+        if self.kiwoom.dynamicCall("GetConnectState()") == 0:
+            self.statusBar().showMessage("Not connected")
+        else:
+            self.statusBar().showMessage("Connected")
 
     # -------------------------------------
     # 로그인 관련함수
@@ -769,6 +789,7 @@ class Kiwoom(QAxWidget):
         :param kwargs:
         :return:
         """
+        print("체결/잔고: %s %s %s" % (sGubun, nItemCnt, sFIdList))
         logger.debug(util.cur_date_time() + " : 체결/잔고: %s %s %s" % (sGubun, nItemCnt, sFIdList))
         if sGubun == '0':
             list_item_name = ["계좌번호", "주문번호", "관리자사번", "종목코드", "주문업무분류",
@@ -833,12 +854,20 @@ class Kiwoom(QAxWidget):
                 종목코드 = 종목코드[1:]
                 dict_holding["종목코드"] = 종목코드
 
+                # 미체결 수량이 있는 경우 잔고 정보 저장하지 않도록 함
+            if (종목코드 in self.michegyeolInfo):
+                if (self.michegyeolInfo[종목코드]['미체결수량']):
+                    return
+                    # 미체결 수량이 없으므로 정보 삭제
+            del (self.michegyeolInfo[종목코드])
+
             # 보유종목 리스트에 추가
             self.dict_holding[종목코드] = dict_holding
 
             logger.debug(util.cur_date_time() + " : 잔고: %s" % (dict_holding,))
             if self.dict_holding[종목코드]["보유수량"] > 0 and self.dict_holding[종목코드]["주문가능수량"] > 0:
-                self._stock_mado_proc(ACCOUNT_NO, 종목코드)
+                accountNo = hts.kiwoom_GetAccountNo()
+                self._stock_mado_proc(accountNo, 종목코드)
 
     def kiwoom_GetChejanData(self, nFid):
         """
@@ -939,8 +968,9 @@ def _isBuyStockAvailable(buy_stock_code, cur_price, start_price):
 
 
 def _isTimeAvalable():
-    #if TEST_MODE:
-    return True
+
+    if TEST_MODE:
+        return True
     now_time = int(datetime.now().strftime('%H%M%S'))
     if (maesu_end_time >= now_time >= maesu_start_time):
         return True
@@ -962,6 +992,7 @@ def load_data():
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     hts = Kiwoom()
+    hts.show()
     result = -1
     order_type = 1
     # login
@@ -986,10 +1017,14 @@ if __name__ == '__main__':
                             high_price = int(hts.dict_stock[code].get('상한가'))
                             if cur_price[0] == '-' or cur_price[0] == '+':
                                 buy_price = int(cur_price[1:])
+                            else:
+                                buy_price = int(cur_price)
                             nQty = int(total_buy_money / buy_price)
                             print("매수수량 : ", nQty, " 매수상한가 : ", high_price)
+                            ### TEST ###
+                            nQty = 1
                             result = hts.kiwoom_SendOrder("send_order", "0101", accountNo, order_type, code, nQty,
-                                                          high_price, "00", "")
+                                                          high_price, "03", "")
                             print(code, result)
                             if result == 0:
                                 print("매수 요청 하였습니다.")
@@ -1007,4 +1042,6 @@ if __name__ == '__main__':
             sys.exit()
 
     # something
+    app.exec_()
     pass
+

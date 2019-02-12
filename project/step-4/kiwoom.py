@@ -105,9 +105,9 @@ class Kiwoom(QAxWidget):
         self.order_result = self.dynamicCall("SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
                          [rqname, screen_no, acc_no, order_type, code, quantity, price, hoga_type, order_no])
 
-        if order_type != 2:
-            self.order_loop = QEventLoop()
-            self.order_loop.exec_()
+        # if order_type != 2:
+        #     self.order_loop = QEventLoop()
+        #     self.order_loop.exec_()
 
     def get_login_info(self, tag):
         return self.dynamicCall("GetLoginInfo(QString)", tag)
@@ -353,24 +353,24 @@ class Kiwoom(QAxWidget):
         printData = ""
         info = []
 
-        # 미체결 수량이 0 이 아닌 경우 다시 체결 정보가 올라 오므로 0인경우 처리 안함 
+        # 미체결 수량이 0 이 아닌 경우 다시 체결 정보가 올라 오므로 0인경우 처리 안함
         michegyeol_suryung = int(self.get_chejan_data(jk_util.name_fid['미체결수량']).strip())
         if (michegyeol_suryung != 0):
             return
         nFid = jk_util.name_fid['매도매수구분']
         result = self.get_chejan_data(nFid).strip()
         maedo_maesu_gubun = '매도' if result == '1' else '매수'
-        # 첫 매수시는 잔고 정보가 없을 수 있으므로 
+        # 첫 매수시는 잔고 정보가 없을 수 있으므로
         current_jango = self.jangoInfo.get(jongmok_code, {})
 
         #################################################################################################
-        # 사용자 정의 컬럼 수익과 수익율 필드 채움 
+        # 사용자 정의 컬럼 수익과 수익율 필드 채움
         if (maedo_maesu_gubun == '매도'):
-            # 체결가를 통해 수익율 필드 업데이트 
+            # 체결가를 통해 수익율 필드 업데이트
             current_price = int(self.get_chejan_data(jk_util.name_fid['체결가']).strip())
             self.calculateSuik(jongmok_code, current_price)
 
-            # 매도시 체결정보는 수익율 필드가 존재 
+            # 매도시 체결정보는 수익율 필드가 존재
             profit = current_jango.get('수익', '0')
             profit_percent = current_jango.get('수익율', '0')
             chumae_count = int(current_jango.get('매수횟수', '0'))
@@ -383,16 +383,16 @@ class Kiwoom(QAxWidget):
             info.append(' {0} '.format(maedo_type))
             pass
         elif (maedo_maesu_gubun == '매수'):
-            # 매수시 체결정보는 수익율 / 수익 필드가  
+            # 매수시 체결정보는 수익율 / 수익 필드가
             info.append('{0:>10}'.format('0'))
             info.append('{0:>10}'.format('0'))
-            # 체결시는 매수 횟수 정보가 업데이트 되지 않았기 때문에 +1 해줌  
+            # 체결시는 매수 횟수 정보가 업데이트 되지 않았기 때문에 +1 해줌
             chumae_count = int(current_jango.get('매수횟수', '0'))
             info.append(' 매수횟수: {0:>1} '.format(chumae_count + 1))
             info.append(' {0} '.format('(단순매수)'))
 
         #################################################################################################
-        # kiwoom api 체결 정보 필드 
+        # kiwoom api 체결 정보 필드
         for col_name in jk_util.dict_jusik["체결정보"]:
             nFid = None
             result = ""
@@ -420,7 +420,7 @@ class Kiwoom(QAxWidget):
             self.chegyeolInfo[current_date] = []
 
             #################################################################################################
-        # 매도시 매수 이력 정보 필드 
+        # 매도시 매수 이력 정보 필드
         if (maedo_maesu_gubun == '매도'):
             info.append(' ' + '\\t'.join(current_jango['체결가/체결시간']))
             pass

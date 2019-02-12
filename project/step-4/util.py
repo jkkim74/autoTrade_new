@@ -70,6 +70,15 @@ def get_prev_date(dif1, dif2, today):
             prev_bus_day_2 = df_mdays_list[i - dif2].__format__('%Y-%m-%d')
             return (prev_bus_day_1, prev_bus_day_2)
 
+# --------------------------------------------------------
+# 변환 관련 유틸
+# --------------------------------------------------------
+def safe_cast(val, to_type, default=None):
+    try:
+        return to_type(val)
+    except (ValueError, TypeError):
+        return default
+
 if __name__ == "__main__":
     print(cur_time())
     print(cur_date())
